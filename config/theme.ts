@@ -5,8 +5,5 @@ export const theme: Theme = extendTheme({
     body: "Manrope, sans-serif",
     heading: "Manrope, sans-serif",
     mono: "Fira Code, monospace"
-  },
-  config: {
-    initialColorMode: "dark"
   }
 });

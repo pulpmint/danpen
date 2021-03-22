@@ -1,13 +1,16 @@
 import { ChakraProvider, CSSReset, ThemeProvider } from "@chakra-ui/react";
 import { AppProps } from "next/app";
 import { theme } from "../config/theme";
+import { PanelContextProvider } from "../context/PanelContext";
 
 function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
       <ThemeProvider theme={theme}>
         <CSSReset />
-        <Component {...pageProps} />
+        <PanelContextProvider>
+          <Component {...pageProps} />
+        </PanelContextProvider>
       </ThemeProvider>
     </ChakraProvider>
   );
