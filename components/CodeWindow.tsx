@@ -3,10 +3,21 @@ import { FC } from "react";
 import usePanelSettings from "../hooks/usePanelSettings";
 
 const CodeWindow: FC = () => {
-  const { darkMode, lineNumber } = usePanelSettings();
+  const { darkMode, background, lineNumber } = usePanelSettings();
 
   const getBackgroundColor = (): string => {
     return darkMode ? "gray.800" : "gray.200";
+  };
+
+  const getGradient = (): string => {
+    const getThemeGradient = (): string => {
+      const color = darkMode ? "gray.400" : "gray.600";
+      return `linear(to-br, ${color} 0%, ${color} 100%)`;
+    };
+
+    const gradient = background ? "linear(to-br, #2F80ED 0%, #B2FFDA 100%)" : getThemeGradient();
+
+    return gradient;
   };
 
   return (
@@ -18,7 +29,7 @@ const CodeWindow: FC = () => {
         bottom="0"
         left="0"
         right="0"
-        bgGradient="linear(to-br, #2F80ED 0%, #B2FFDA 100%)"
+        bgGradient={getGradient()}
       ></Box>
 
       <Container
