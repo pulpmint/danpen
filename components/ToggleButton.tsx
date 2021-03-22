@@ -1,13 +1,9 @@
-import { IconButton, IconButtonProps } from "@chakra-ui/button";
+import { IconButton } from "@chakra-ui/button";
 import { FC } from "react";
 import usePanelSettings from "../hooks/usePanelSettings";
+import { IToggleButton } from "../types/ToggleButton";
 
-interface ComponentProps extends IconButtonProps {
-  toggleValue: boolean;
-  toggle: Function;
-}
-
-const ToggleButton: FC<ComponentProps> = ({ toggleValue, toggle, ...props }) => {
+const ToggleButton: FC<IToggleButton> = ({ label, icon, toggleValue, toggle }) => {
   const { darkMode } = usePanelSettings();
 
   const getBackgroundColor = (): string => {
@@ -16,9 +12,10 @@ const ToggleButton: FC<ComponentProps> = ({ toggleValue, toggle, ...props }) => 
 
   return (
     <IconButton
-      {...props}
       marginRight="4"
       borderRadius="full"
+      icon={icon}
+      aria-label={label}
       backgroundColor={toggleValue ? getBackgroundColor() : "transparent"}
       onClick={() => toggle()}
     />
