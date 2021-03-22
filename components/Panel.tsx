@@ -1,11 +1,11 @@
 import { Container } from "@chakra-ui/layout";
 import { FC } from "react";
-import { Moon } from "react-feather";
+import { List, Moon } from "react-feather";
 import usePanelSettings from "../hooks/usePanelSettings";
 import ToggleButton from "./ToggleButton";
 
 const Panel: FC = () => {
-  const { darkMode, setDarkMode } = usePanelSettings();
+  const { darkMode, lineNumber, setDarkMode, setLineNumber } = usePanelSettings();
 
   const getBackgroundColor = (): string => {
     return darkMode ? "gray.900" : "gray.100";
@@ -25,6 +25,13 @@ const Panel: FC = () => {
           toggleValue={darkMode}
           icon={<Moon size={20} />}
           toggle={() => setDarkMode()}
+        />
+
+        <ToggleButton
+          aria-label="Toggle Line Number"
+          toggleValue={lineNumber}
+          icon={<List size={20} />}
+          toggle={() => setLineNumber(!lineNumber)}
         />
       </Container>
     </Container>
