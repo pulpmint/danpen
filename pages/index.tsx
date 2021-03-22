@@ -1,6 +1,7 @@
 import { Container } from "@chakra-ui/layout";
 import Head from "next/head";
 import { FC } from "react";
+import CodeWindow from "../components/CodeWindow";
 import Panel from "../components/Panel";
 import { SEO_DESCRIPTION, SEO_TITLE } from "../constants/seo";
 
@@ -14,13 +15,14 @@ const Home: FC = () => {
 
       <main>
         <Container
+          zIndex="popover"
           minHeight="100vh"
           maxWidth="container.lg"
           display="flex"
           flexDirection="column"
           justifyContent="center"
         >
-          <code>console.log("Hello");</code>
+          <CodeWindow />
         </Container>
 
         <Panel />
