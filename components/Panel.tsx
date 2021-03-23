@@ -3,6 +3,7 @@ import { FC } from "react";
 import { Layers, List, Maximize, Moon } from "react-feather";
 import usePanelSettings from "../hooks/usePanelSettings";
 import { IToggleButton } from "../types/ToggleButton";
+import ColorPicker from "./ColorPicker";
 import ToggleButton from "./ToggleButton";
 
 const Panel: FC = () => {
@@ -56,7 +57,11 @@ const Panel: FC = () => {
         borderRadius="lg"
         boxShadow="md"
         backgroundColor={getBackgroundColor()}
+        display="flex"
+        alignItems="center"
       >
+        <ColorPicker />
+
         {toggleOptions.map(({ label, icon, toggleValue, toggle }) => (
           <ToggleButton
             key={label}
