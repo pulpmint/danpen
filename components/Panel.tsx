@@ -1,6 +1,6 @@
 import { Container } from "@chakra-ui/layout";
 import { FC } from "react";
-import { Layers, List, Moon } from "react-feather";
+import { Layers, List, Maximize, Moon } from "react-feather";
 import usePanelSettings from "../hooks/usePanelSettings";
 import { IToggleButton } from "../types/ToggleButton";
 import ToggleButton from "./ToggleButton";
@@ -10,9 +10,11 @@ const Panel: FC = () => {
     darkMode,
     lineNumber,
     background,
+    maxWidth,
     setDarkMode,
     setLineNumber,
-    setBackground
+    setBackground,
+    setMaxWidth
   } = usePanelSettings();
 
   const toggleOptions: IToggleButton[] = [
@@ -33,6 +35,12 @@ const Panel: FC = () => {
       icon: <List size={20} />,
       toggleValue: lineNumber,
       toggle: () => setLineNumber(!lineNumber)
+    },
+    {
+      label: "Toggle Max Width",
+      icon: <Maximize size={20} />,
+      toggleValue: maxWidth,
+      toggle: () => setMaxWidth(!maxWidth)
     }
   ];
 

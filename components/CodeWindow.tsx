@@ -4,7 +4,7 @@ import usePanelSettings from "../hooks/usePanelSettings";
 import WindowControls from "./WindowControls";
 
 const CodeWindow: FC = () => {
-  const { darkMode, background, lineNumber } = usePanelSettings();
+  const { darkMode, background, lineNumber, maxWidth } = usePanelSettings();
 
   const getBackgroundColor = (): string => {
     return darkMode ? "gray.800" : "gray.200";
@@ -34,7 +34,7 @@ const CodeWindow: FC = () => {
       ></Box>
 
       <Container
-        maxWidth="container.md"
+        maxWidth={`container.${maxWidth ? "lg" : "md"}`}
         minHeight="md"
         marginTop="32"
         marginBottom="32"
