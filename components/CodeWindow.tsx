@@ -1,6 +1,7 @@
 import { Box, Container } from "@chakra-ui/layout";
 import { FC } from "react";
 import usePanelSettings from "../hooks/usePanelSettings";
+import WindowControls from "./WindowControls";
 
 const CodeWindow: FC = () => {
   const { darkMode, background, lineNumber } = usePanelSettings();
@@ -39,15 +40,13 @@ const CodeWindow: FC = () => {
         marginBottom="32"
         marginLeft="auto"
         marginRight="auto"
-        paddingLeft="4"
-        paddingRight="4"
-        paddingTop="2"
-        paddingBottom="2"
+        padding="4"
         borderRadius="md"
         boxShadow="xl"
-        opacity="0.9"
         backgroundColor={getBackgroundColor()}
       >
+        <WindowControls />
+
         <code>
           <span style={{ opacity: 0.5 }}>{lineNumber ? `1. ` : null}</span>
           console.log("Hello");
