@@ -1,7 +1,7 @@
 import { Container } from "@chakra-ui/layout";
 import { FC } from "react";
 import { Layers, List, Maximize, Moon } from "react-feather";
-import { PADDING } from "../constants/padding";
+import { PADDING } from "../constants/panelSettings";
 import usePanelSettings from "../hooks/usePanelSettings";
 import { IToggleButton } from "../types/ToggleButton";
 import ColorPicker from "./ColorPicker";
