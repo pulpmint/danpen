@@ -1,8 +1,8 @@
 import { useColorMode } from "@chakra-ui/color-mode";
 import { createContext, FC, useState } from "react";
 import { GRADIENTS } from "../constants/gradients";
-import { PADDING } from "../constants/padding";
-import { PaddingSetting } from "../types/PanelSettings";
+import { PADDING, FONTSTYLE } from "../constants/panelSettings";
+import { FontSetting, PaddingSetting } from "../types/PanelSettings";
 
 export interface IPanelContext {
   darkMode: boolean;
@@ -11,12 +11,14 @@ export interface IPanelContext {
   maxWidth: boolean;
   color: string;
   padding: PaddingSetting;
+  font: FontSetting;
   setDarkMode: Function;
   setLineNumber: Function;
   setBackground: Function;
   setMaxWidth: Function;
   setColor: Function;
   setPadding: Function;
+  setFont: Function;
 }
 
 const initialContext: IPanelContext = {
@@ -26,12 +28,14 @@ const initialContext: IPanelContext = {
   maxWidth: false,
   padding: PADDING[0],
   color: GRADIENTS[0],
+  font: FONTSTYLE[0],
   setDarkMode: () => {},
   setLineNumber: () => {},
   setBackground: () => {},
   setMaxWidth: () => {},
   setColor: () => {},
-  setPadding: () => {}
+  setPadding: () => {},
+  setFont: () => {}
 };
 
 const PanelContext = createContext<IPanelContext>(initialContext);
@@ -44,6 +48,7 @@ export const PanelContextProvider: FC = ({ children }) => {
   const [maxWidth, setMaxWidth] = useState<boolean>(initialContext.maxWidth);
   const [color, setColor] = useState<string>(initialContext.color);
   const [padding, setPadding] = useState<PaddingSetting>(initialContext.padding);
+  const [font, setFont] = useState<FontSetting>(initialContext.font);
 
   return (
     <PanelContext.Provider
@@ -54,12 +59,14 @@ export const PanelContextProvider: FC = ({ children }) => {
         maxWidth,
         color,
         padding,
+        font,
         setDarkMode: toggleColorMode,
         setLineNumber,
         setBackground,
         setMaxWidth,
         setColor,
-        setPadding
+        setPadding,
+        setFont
       }}
     >
       {children}
