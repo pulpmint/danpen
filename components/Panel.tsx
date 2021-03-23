@@ -1,9 +1,11 @@
 import { Container } from "@chakra-ui/layout";
 import { FC } from "react";
 import { Layers, List, Maximize, Moon } from "react-feather";
+import { PADDING } from "../constants/padding";
 import usePanelSettings from "../hooks/usePanelSettings";
 import { IToggleButton } from "../types/ToggleButton";
 import ColorPicker from "./ColorPicker";
+import CustomSelect from "./CustomSelect";
 import ToggleButton from "./ToggleButton";
 
 const Panel: FC = () => {
@@ -12,10 +14,12 @@ const Panel: FC = () => {
     lineNumber,
     background,
     maxWidth,
+    padding,
     setDarkMode,
     setLineNumber,
     setBackground,
-    setMaxWidth
+    setMaxWidth,
+    setPadding
   } = usePanelSettings();
 
   const toggleOptions: IToggleButton[] = [
@@ -71,6 +75,13 @@ const Panel: FC = () => {
             toggle={toggle}
           />
         ))}
+
+        <CustomSelect
+          label="Padding"
+          value={`${padding} PT`}
+          list={PADDING}
+          changeValue={item => setPadding(item)}
+        />
       </Container>
     </Container>
   );
