@@ -1,7 +1,7 @@
 import { Container } from "@chakra-ui/layout";
 import { FC } from "react";
 import { Layers, List, Maximize, Moon } from "react-feather";
-import { PADDING } from "../constants/panelSettings";
+import { FONTSTYLE, PADDING } from "../constants/panelSettings";
 import usePanelSettings from "../hooks/usePanelSettings";
 import { IToggleButton } from "../types/ToggleButton";
 import ColorPicker from "./ColorPicker";
@@ -15,11 +15,13 @@ const Panel: FC = () => {
     background,
     maxWidth,
     padding,
+    font,
     setDarkMode,
     setLineNumber,
     setBackground,
     setMaxWidth,
-    setPadding
+    setPadding,
+    setFont
   } = usePanelSettings();
 
   const toggleOptions: IToggleButton[] = [
@@ -81,6 +83,13 @@ const Panel: FC = () => {
           value={`${padding} PT`}
           list={PADDING}
           changeValue={item => setPadding(item)}
+        />
+
+        <CustomSelect
+          label="Font Style"
+          value={font}
+          list={FONTSTYLE}
+          changeValue={item => setFont(item)}
         />
       </Container>
     </Container>

@@ -4,7 +4,7 @@ import usePanelSettings from "../hooks/usePanelSettings";
 import WindowControls from "./WindowControls";
 
 const CodeWindow: FC = () => {
-  const { darkMode, background, lineNumber, maxWidth, color, padding } = usePanelSettings();
+  const { darkMode, background, lineNumber, maxWidth, color, padding, font } = usePanelSettings();
 
   const getBackgroundColor = (): string => {
     return darkMode ? "gray.800" : "gray.200";
@@ -51,7 +51,7 @@ const CodeWindow: FC = () => {
         >
           <WindowControls />
 
-          <code>
+          <code style={{ fontFamily: font }}>
             <span style={{ opacity: 0.5 }}>{lineNumber ? `1. ` : null}</span>
             console.log("Hello");
           </code>
