@@ -1,6 +1,7 @@
 import { useColorMode } from "@chakra-ui/color-mode";
 import { createContext, FC, useState } from "react";
 import { GRADIENTS } from "../constants/gradients";
+import { PaddingSetting } from "../types/PanelSettings";
 
 export interface IPanelContext {
   darkMode: boolean;
@@ -8,11 +9,13 @@ export interface IPanelContext {
   background: boolean;
   maxWidth: boolean;
   color: string;
+  padding: PaddingSetting;
   setDarkMode: Function;
   setLineNumber: Function;
   setBackground: Function;
   setMaxWidth: Function;
   setColor: Function;
+  setPadding: Function;
 }
 
 const initialContext: IPanelContext = {
@@ -20,12 +23,14 @@ const initialContext: IPanelContext = {
   lineNumber: false,
   background: true,
   maxWidth: false,
+  padding: 16,
   color: GRADIENTS[GRADIENTS.length - 1],
   setDarkMode: () => {},
   setLineNumber: () => {},
   setBackground: () => {},
   setMaxWidth: () => {},
-  setColor: () => {}
+  setColor: () => {},
+  setPadding: () => {}
 };
 
 const PanelContext = createContext<IPanelContext>(initialContext);
@@ -37,6 +42,7 @@ export const PanelContextProvider: FC = ({ children }) => {
   const [background, setBackground] = useState<boolean>(initialContext.background);
   const [maxWidth, setMaxWidth] = useState<boolean>(initialContext.maxWidth);
   const [color, setColor] = useState<string>(initialContext.color);
+  const [padding, setPadding] = useState<PaddingSetting>(initialContext.padding);
 
   return (
     <PanelContext.Provider
@@ -46,11 +52,13 @@ export const PanelContextProvider: FC = ({ children }) => {
         background,
         maxWidth,
         color,
+        padding,
         setDarkMode: toggleColorMode,
         setLineNumber,
         setBackground,
         setMaxWidth,
-        setColor
+        setColor,
+        setPadding
       }}
     >
       {children}
