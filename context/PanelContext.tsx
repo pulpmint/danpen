@@ -1,6 +1,7 @@
 import { useColorMode } from "@chakra-ui/color-mode";
 import { createContext, FC, useState } from "react";
 import { GRADIENTS } from "../constants/gradients";
+import { PADDING } from "../constants/padding";
 import { PaddingSetting } from "../types/PanelSettings";
 
 export interface IPanelContext {
@@ -23,8 +24,8 @@ const initialContext: IPanelContext = {
   lineNumber: false,
   background: true,
   maxWidth: false,
-  padding: 16,
-  color: GRADIENTS[GRADIENTS.length - 1],
+  padding: PADDING[0],
+  color: GRADIENTS[0],
   setDarkMode: () => {},
   setLineNumber: () => {},
   setBackground: () => {},
