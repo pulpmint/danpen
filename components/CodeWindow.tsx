@@ -4,7 +4,7 @@ import usePanelSettings from "../hooks/usePanelSettings";
 import WindowControls from "./WindowControls";
 
 const CodeWindow: FC = () => {
-  const { darkMode, background, lineNumber, maxWidth, color } = usePanelSettings();
+  const { darkMode, background, lineNumber, maxWidth, color, padding } = usePanelSettings();
 
   const getBackgroundColor = (): string => {
     return darkMode ? "gray.800" : "gray.200";
@@ -35,22 +35,27 @@ const CodeWindow: FC = () => {
 
       <Container
         maxWidth={`container.${maxWidth ? "lg" : "md"}`}
-        minHeight="md"
-        marginTop="32"
-        marginBottom="32"
+        padding={padding}
+        marginTop="16"
+        marginBottom="16"
         marginLeft="auto"
         marginRight="auto"
-        padding="4"
-        borderRadius="md"
-        boxShadow="xl"
-        backgroundColor={getBackgroundColor()}
+        backgroundColor="blackAlpha.50"
       >
-        <WindowControls />
+        <Box
+          minHeight="md"
+          padding="4"
+          borderRadius="md"
+          boxShadow="xl"
+          backgroundColor={getBackgroundColor()}
+        >
+          <WindowControls />
 
-        <code>
-          <span style={{ opacity: 0.5 }}>{lineNumber ? `1. ` : null}</span>
-          console.log("Hello");
-        </code>
+          <code>
+            <span style={{ opacity: 0.5 }}>{lineNumber ? `1. ` : null}</span>
+            console.log("Hello");
+          </code>
+        </Box>
       </Container>
     </>
   );
