@@ -4,7 +4,7 @@ import usePanelSettings from "../hooks/usePanelSettings";
 import WindowControls from "./WindowControls";
 
 const CodeWindow: FC = () => {
-  const { darkMode, background, lineNumber, maxWidth } = usePanelSettings();
+  const { darkMode, background, lineNumber, maxWidth, color } = usePanelSettings();
 
   const getBackgroundColor = (): string => {
     return darkMode ? "gray.800" : "gray.200";
@@ -16,7 +16,7 @@ const CodeWindow: FC = () => {
       return `linear(to-br, ${color} 0%, ${color} 100%)`;
     };
 
-    const gradient = background ? "linear(to-br, #2F80ED 0%, #B2FFDA 100%)" : getThemeGradient();
+    const gradient = background ? color : getThemeGradient();
 
     return gradient;
   };
