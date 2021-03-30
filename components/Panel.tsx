@@ -1,5 +1,6 @@
 import { Container } from "@chakra-ui/layout";
-import { FC } from "react";
+import { SlideFade } from "@chakra-ui/transition";
+import { FC, useEffect, useState } from "react";
 import { Layers, List, Maximize, Moon } from "react-feather";
 import { FONTSTYLE, PADDING } from "../constants/panelSettings";
 import usePanelSettings from "../hooks/usePanelSettings";
@@ -24,6 +25,8 @@ const Panel: FC = () => {
     setPadding,
     setFont
   } = usePanelSettings();
+
+  const [mounted, setMounted] = useState<boolean>(false);
 
   const toggleOptions: IToggleButton[] = [
     {
@@ -56,46 +59,52 @@ const Panel: FC = () => {
     return darkMode ? "gray.900" : "gray.100";
   };
 
+  useEffect(() => {
+    setTimeout(() => setMounted(true), 375);
+  }, []);
+
   return (
-    <Container position="fixed" bottom="8" maxWidth="full" zIndex="1000">
-      <Container
-        maxWidth="container.lg"
-        padding="4"
-        borderRadius="lg"
-        boxShadow="md"
-        backgroundColor={getBackgroundColor()}
-        display="flex"
-        alignItems="center"
-      >
-        <ColorPicker />
+    <SlideFade in={mounted} offsetY="-1rem">
+      <Container position="fixed" bottom="8" maxWidth="full" zIndex="1000">
+        <Container
+          maxWidth="container.lg"
+          padding="4"
+          borderRadius="lg"
+          boxShadow="md"
+          backgroundColor={getBackgroundColor()}
+          display="flex"
+          alignItems="center"
+        >
+          <ColorPicker />
 
-        {toggleOptions.map(({ label, icon, toggleValue, toggle }) => (
-          <ToggleButton
-            key={label}
-            label={label}
-            toggleValue={toggleValue}
-            icon={icon}
-            toggle={toggle}
+          {toggleOptions.map(({ label, icon, toggleValue, toggle }) => (
+            <ToggleButton
+              key={label}
+              label={label}
+              toggleValue={toggleValue}
+              icon={icon}
+              toggle={toggle}
+            />
+          ))}
+
+          <CustomSelect
+            label="Padding"
+            value={`${padding} PT`}
+            list={PADDING}
+            changeValue={item => setPadding(item)}
           />
-        ))}
 
-        <CustomSelect
-          label="Padding"
-          value={`${padding} PT`}
-          list={PADDING}
-          changeValue={item => setPadding(item)}
-        />
+          <CustomSelect
+            label="Font Style"
+            value={font}
+            list={FONTSTYLE}
+            changeValue={item => setFont(item)}
+          />
 
-        <CustomSelect
-          label="Font Style"
-          value={font}
-          list={FONTSTYLE}
-          changeValue={item => setFont(item)}
-        />
-
-        <LanguagePicker />
+          <LanguagePicker />
+        </Container>
       </Container>
-    </Container>
+    </SlideFade>
   );
 };
 
