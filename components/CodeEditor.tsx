@@ -6,7 +6,7 @@ import usePanelSettings from "../hooks/usePanelSettings";
 import { CDN_LINK, DEF_CODE } from "../constants/misc";
 
 const CodeEditor: FC = () => {
-  const { language, setPredictions } = usePanelSettings();
+  const { lineNumber, language, setPredictions } = usePanelSettings();
   const editorRef = useRef(null);
 
   const [code, setCode] = useState<string>(DEF_CODE);
@@ -87,6 +87,11 @@ const CodeEditor: FC = () => {
       loadMode(language);
     }
   }, [language]);
+
+  useEffect(() => {
+    // @ts-expect-error
+    window.editor.setOption("lineNumbers", lineNumber);
+  }, [lineNumber]);
 
   return (
     <textarea
