@@ -14,6 +14,7 @@ export interface IPanelContext {
   padding: PaddingSetting;
   font: FontSetting;
   language: ILanguage;
+  predictions: ILanguage;
   setDarkMode: Function;
   setLineNumber: Function;
   setBackground: Function;
@@ -22,6 +23,7 @@ export interface IPanelContext {
   setPadding: Function;
   setFont: Function;
   setLanguage: Function;
+  setPredictions: Function;
 }
 
 const initialContext: IPanelContext = {
@@ -33,6 +35,7 @@ const initialContext: IPanelContext = {
   color: GRADIENTS[0],
   font: FONTSTYLE[0],
   language: LANGUAGES[0],
+  predictions: null,
   setDarkMode: () => {},
   setLineNumber: () => {},
   setBackground: () => {},
@@ -40,7 +43,8 @@ const initialContext: IPanelContext = {
   setColor: () => {},
   setPadding: () => {},
   setFont: () => {},
-  setLanguage: () => {}
+  setLanguage: () => {},
+  setPredictions: () => {}
 };
 
 const PanelContext = createContext<IPanelContext>(initialContext);
@@ -54,7 +58,8 @@ export const PanelContextProvider: FC = ({ children }) => {
   const [color, setColor] = useState<string>(initialContext.color);
   const [padding, setPadding] = useState<PaddingSetting>(initialContext.padding);
   const [font, setFont] = useState<FontSetting>(initialContext.font);
-  const [language, setLanguage] = useState<any>(initialContext.language);
+  const [language, setLanguage] = useState<ILanguage>(initialContext.language);
+  const [predictions, setPredictions] = useState<ILanguage>(initialContext.predictions);
 
   return (
     <PanelContext.Provider
@@ -67,6 +72,7 @@ export const PanelContextProvider: FC = ({ children }) => {
         padding,
         font,
         language,
+        predictions,
         setDarkMode: toggleColorMode,
         setLineNumber,
         setBackground,
@@ -74,7 +80,8 @@ export const PanelContextProvider: FC = ({ children }) => {
         setColor,
         setPadding,
         setFont,
-        setLanguage
+        setLanguage,
+        setPredictions
       }}
     >
       {children}
