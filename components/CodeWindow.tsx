@@ -55,7 +55,7 @@ const CodeWindow: FC = () => {
         >
           <ScaleFade initialScale={0.875} in={mountedWindow}>
             <Box
-              minHeight="md"
+              minHeight="max-content"
               padding="4"
               borderRadius="md"
               boxShadow="xl"
