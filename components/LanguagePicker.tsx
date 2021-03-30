@@ -6,7 +6,12 @@ import { LANGUAGES } from "../constants/languages";
 import usePanelSettings from "../hooks/usePanelSettings";
 
 const LanguagePicker: FC = () => {
-  const { language, setLanguage } = usePanelSettings();
+  const { language, predictions, setLanguage, setPredictions } = usePanelSettings();
+
+  const getLabel = (): string => {
+    if (language.mode === "auto") return predictions ? "Auto - " + predictions.name : "Auto";
+    return language.name;
+  };
 
   return (
     <Box marginRight="4">
@@ -16,7 +21,7 @@ const LanguagePicker: FC = () => {
 
       <Menu>
         <MenuButton marginRight="4" size="xs" as={Button}>
-          {language.name}
+          {getLabel()}
         </MenuButton>
 
         <MenuList maxHeight="64" overflowY="auto">
@@ -24,11 +29,11 @@ const LanguagePicker: FC = () => {
             <MenuItem
               key={index}
               onClick={() => {
-                console.log("changing to...", item);
+                setPredictions(null);
                 setLanguage(item);
               }}
             >
-              {item.name}
+              {item.mode === "auto" ? getLabel() : item.name}
             </MenuItem>
           ))}
         </MenuList>
