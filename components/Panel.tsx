@@ -6,6 +6,7 @@ import usePanelSettings from "../hooks/usePanelSettings";
 import { IToggleButton } from "../types/ToggleButton";
 import ColorPicker from "./ColorPicker";
 import CustomSelect from "./CustomSelect";
+import LanguagePicker from "./LanguagePicker";
 import ToggleButton from "./ToggleButton";
 
 const Panel: FC = () => {
@@ -56,7 +57,7 @@ const Panel: FC = () => {
   };
 
   return (
-    <Container position="fixed" bottom="8" maxWidth="full">
+    <Container position="fixed" bottom="8" maxWidth="full" zIndex="1000">
       <Container
         maxWidth="container.lg"
         padding="4"
@@ -91,6 +92,8 @@ const Panel: FC = () => {
           list={FONTSTYLE}
           changeValue={item => setFont(item)}
         />
+
+        <LanguagePicker />
       </Container>
     </Container>
   );
