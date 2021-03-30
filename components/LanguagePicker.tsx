@@ -33,7 +33,7 @@ const LanguagePicker: FC = () => {
                 setLanguage(item);
               }}
             >
-              {item.mode === "auto" ? getLabel() : item.name}
+              {language.mode === "auto" && item.mode === "auto" ? getLabel() : item.name}
             </MenuItem>
           ))}
         </MenuList>
