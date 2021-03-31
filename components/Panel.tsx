@@ -1,6 +1,7 @@
-import { Container } from "@chakra-ui/layout";
+import { IconButton } from "@chakra-ui/button";
+import { Box, Container } from "@chakra-ui/layout";
 import { FC } from "react";
-import { Layers, List, Maximize, Moon } from "react-feather";
+import { Layers, List, Maximize, Moon, Save } from "react-feather";
 import { FONTSTYLE, PADDING } from "../constants/panelSettings";
 import usePanelSettings from "../hooks/usePanelSettings";
 import { IToggleButton } from "../types/ToggleButton";
@@ -8,6 +9,8 @@ import ColorPicker from "./ColorPicker";
 import CustomSelect from "./CustomSelect";
 import LanguagePicker from "./LanguagePicker";
 import ToggleButton from "./ToggleButton";
+
+import domToImage from "../public/js/domToImage";
 
 const Panel: FC = () => {
   const {
@@ -24,6 +27,8 @@ const Panel: FC = () => {
     setPadding,
     setFont
   } = usePanelSettings();
+
+  const exportSize: number = 2;
 
   const toggleOptions: IToggleButton[] = [
     {
@@ -56,6 +61,44 @@ const Panel: FC = () => {
     return darkMode ? "gray.900" : "gray.100";
   };
 
+  const exportImage = async () => {
+    if (document && window) {
+      const link = document.createElement("a");
+
+      const config = {
+        style: {
+          transform: `scale(${exportSize})`,
+          "transform-origin": "top left",
+          background: "none"
+        },
+        filter: n => {
+          if (n.className) {
+            const className = String(n.className);
+            if (className.includes("eliminateOnRender")) {
+              return false;
+            }
+            if (className.includes("CodeMirror-cursors")) {
+              return false;
+            }
+          }
+          return true;
+        },
+        width: document.getElementById("danpen").offsetWidth * exportSize,
+        height: document.getElementById("danpen").offsetHeight * exportSize
+      };
+
+      const base64 = await domToImage.toPng(document.getElementById("danpen"), config);
+
+      link.href = base64;
+      link.download = "Danpen.png";
+
+      document.body.appendChild(link);
+
+      link.click();
+      link.remove();
+    }
+  };
+
   return (
     <Container position="fixed" bottom="8" maxWidth="full" zIndex="1000">
       <Container
@@ -66,34 +109,45 @@ const Panel: FC = () => {
         backgroundColor={getBackgroundColor()}
         display="flex"
         alignItems="center"
+        justifyContent="space-between"
       >
-        <ColorPicker />
+        <Box display="flex" alignItems="center">
+          <ColorPicker />
 
-        {toggleOptions.map(({ label, icon, toggleValue, toggle }) => (
-          <ToggleButton
-            key={label}
-            label={label}
-            toggleValue={toggleValue}
-            icon={icon}
-            toggle={toggle}
+          {toggleOptions.map(({ label, icon, toggleValue, toggle }) => (
+            <ToggleButton
+              key={label}
+              label={label}
+              toggleValue={toggleValue}
+              icon={icon}
+              toggle={toggle}
+            />
+          ))}
+
+          <CustomSelect
+            label="Padding"
+            value={`${padding} PT`}
+            list={PADDING}
+            changeValue={item => setPadding(item)}
           />
-        ))}
 
-        <CustomSelect
-          label="Padding"
-          value={`${padding} PT`}
-          list={PADDING}
-          changeValue={item => setPadding(item)}
+          <CustomSelect
+            label="Font Style"
+            value={font}
+            list={FONTSTYLE}
+            changeValue={item => setFont(item)}
+          />
+
+          <LanguagePicker />
+        </Box>
+
+        <IconButton
+          colorScheme="green"
+          borderRadius="full"
+          aria-label="Download Image"
+          icon={<Save size={20} />}
+          onClick={() => exportImage()}
         />
-
-        <CustomSelect
-          label="Font Style"
-          value={font}
-          list={FONTSTYLE}
-          changeValue={item => setFont(item)}
-        />
-
-        <LanguagePicker />
       </Container>
     </Container>
   );
