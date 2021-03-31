@@ -3,6 +3,7 @@ import { AppProps } from "next/app";
 import { theme } from "../config/theme";
 import { PanelContextProvider } from "../context/PanelContext";
 import CodeMirrorTheme from "../styles/CodeMirrorTheme";
+import FontFaces from "../styles/FontFaces";
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -10,6 +11,7 @@ function App({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={theme}>
         <CSSReset />
         <PanelContextProvider>
+          <FontFaces />
           <CodeMirrorTheme />
           <Component {...pageProps} />
         </PanelContextProvider>
