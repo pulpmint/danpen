@@ -1,15 +1,11 @@
-import { Box, Container } from "@chakra-ui/layout";
-import { Fade, ScaleFade } from "@chakra-ui/transition";
-import { FC, useEffect, useState } from "react";
+import { Box } from "@chakra-ui/layout";
+import { FC } from "react";
 import usePanelSettings from "../hooks/usePanelSettings";
 import CodeEditor from "./CodeEditor";
 import WindowControls from "./WindowControls";
 
 const CodeWindow: FC = () => {
-  const { darkMode, background, maxWidth, color, padding } = usePanelSettings();
-
-  const [mountedBackdrop, setMountedBackdrop] = useState<boolean>(false);
-  const [mountedWindow, setMountedWindow] = useState<boolean>(false);
+  const { darkMode, background, color, padding } = usePanelSettings();
 
   const getBackgroundColor = (): string => {
     return darkMode ? "gray.800" : "gray.200";
@@ -26,13 +22,8 @@ const CodeWindow: FC = () => {
     return gradient;
   };
 
-  useEffect(() => {
-    setTimeout(() => setMountedBackdrop(true), 125);
-    setTimeout(() => setMountedWindow(true), 250);
-  }, []);
-
   return (
-    <>
+    <Box id="danpen">
       <Box
         zIndex="-1"
         position="fixed"
@@ -43,32 +34,21 @@ const CodeWindow: FC = () => {
         bgGradient={getGradient()}
       ></Box>
 
-      <Fade in={mountedBackdrop}>
-        <Container
-          maxWidth={`container.${maxWidth ? "lg" : "md"}`}
-          padding={padding}
-          marginTop="16"
-          marginBottom="16"
-          marginLeft="auto"
-          marginRight="auto"
-          backgroundColor="blackAlpha.50"
+      <Box width="full" padding={padding} backgroundColor="blackAlpha.50">
+        <Box
+          width="full"
+          minHeight="max-content"
+          padding="4"
+          borderRadius="md"
+          boxShadow="xl"
+          backgroundColor={getBackgroundColor()}
         >
-          <ScaleFade initialScale={0.875} in={mountedWindow}>
-            <Box
-              minHeight="max-content"
-              padding="4"
-              borderRadius="md"
-              boxShadow="xl"
-              backgroundColor={getBackgroundColor()}
-            >
-              <WindowControls />
+          <WindowControls />
 
-              <CodeEditor />
-            </Box>
-          </ScaleFade>
-        </Container>
-      </Fade>
-    </>
+          <CodeEditor />
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
