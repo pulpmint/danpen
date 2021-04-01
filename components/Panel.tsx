@@ -6,7 +6,7 @@ import usePanelSettings from "../hooks/usePanelSettings";
 import { IToggleButton } from "../types/ToggleButton";
 import ColorPicker from "./ColorPicker";
 import CustomSelect from "./CustomSelect";
-import DownloadDialog from "./Download";
+import DownloadDialog from "./DownloadDialog";
 import LanguagePicker from "./LanguagePicker";
 import ToggleButton from "./ToggleButton";
 
