@@ -1,11 +1,14 @@
 import { Box } from "@chakra-ui/layout";
-import { FC } from "react";
+import { ScaleFade } from "@chakra-ui/transition";
+import { FC, useEffect, useState } from "react";
 import usePanelSettings from "../hooks/usePanelSettings";
 import CodeEditor from "./CodeEditor";
 import WindowControls from "./WindowControls";
 
 const CodeWindow: FC = () => {
   const { darkMode, background, color, padding } = usePanelSettings();
+
+  const [mounted, setMounted] = useState<boolean>(false);
 
   const getBackgroundColor = (): string => {
     return darkMode ? "gray.800" : "gray.200";
@@ -22,6 +25,10 @@ const CodeWindow: FC = () => {
     return gradient;
   };
 
+  useEffect(() => {
+    setTimeout(() => setMounted(true), 250);
+  }, []);2
+
   return (
     <Box id="danpen">
       <Box
@@ -35,20 +42,22 @@ const CodeWindow: FC = () => {
         bgGradient={getGradient()}
       ></Box>
 
-      <Box width="full" padding={padding} backgroundColor="blackAlpha.50">
-        <Box
-          width="full"
-          minHeight="max-content"
-          padding="4"
-          borderRadius="md"
-          boxShadow="xl"
-          backgroundColor={getBackgroundColor()}
-        >
-          <WindowControls />
+      <ScaleFade in={mounted}>
+        <Box width="full" padding={padding} backgroundColor="blackAlpha.50">
+          <Box
+            width="full"
+            minHeight="max-content"
+            padding="4"
+            borderRadius="md"
+            boxShadow="xl"
+            backgroundColor={getBackgroundColor()}
+          >
+            <WindowControls />
 
-          <CodeEditor />
+            <CodeEditor />
+          </Box>
         </Box>
-      </Box>
+      </ScaleFade>
     </Box>
   );
 };
