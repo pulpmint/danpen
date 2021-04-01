@@ -89,7 +89,7 @@ const DownloadDialog: FC = () => {
 
           <ModalBody>
             <Text mt={2} mb={4}>
-              We all say size doen't matter but it's not true and we all know it. Select a size to
+              We all say size doesn't matter but it's not true and we all know it. Select a size to
               download.
             </Text>
 
