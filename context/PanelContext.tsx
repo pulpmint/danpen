@@ -1,8 +1,9 @@
 import { useColorMode } from "@chakra-ui/color-mode";
 import { createContext, FC, useState } from "react";
 import { GRADIENTS } from "../constants/gradients";
+import { ILanguage, LANGUAGES } from "../constants/languages";
 import { PADDING, FONTSTYLE } from "../constants/panelSettings";
-import { FontSetting, PaddingSetting } from "../types/PanelSettings";
+import { FontSetting, PaddingSetting, ExportSize } from "../types/PanelSettings";
 
 export interface IPanelContext {
   darkMode: boolean;
@@ -12,6 +13,9 @@ export interface IPanelContext {
   color: string;
   padding: PaddingSetting;
   font: FontSetting;
+  language: ILanguage;
+  predictions: ILanguage;
+  exportSize: ExportSize;
   setDarkMode: Function;
   setLineNumber: Function;
   setBackground: Function;
@@ -19,6 +23,9 @@ export interface IPanelContext {
   setColor: Function;
   setPadding: Function;
   setFont: Function;
+  setLanguage: Function;
+  setPredictions: Function;
+  setExportSize: Function;
 }
 
 const initialContext: IPanelContext = {
@@ -29,13 +36,19 @@ const initialContext: IPanelContext = {
   padding: PADDING[0],
   color: GRADIENTS[0],
   font: FONTSTYLE[0],
+  language: LANGUAGES[0],
+  predictions: null,
+  exportSize: 3,
   setDarkMode: () => {},
   setLineNumber: () => {},
   setBackground: () => {},
   setMaxWidth: () => {},
   setColor: () => {},
   setPadding: () => {},
-  setFont: () => {}
+  setFont: () => {},
+  setLanguage: () => {},
+  setPredictions: () => {},
+  setExportSize: () => {}
 };
 
 const PanelContext = createContext<IPanelContext>(initialContext);
@@ -49,6 +62,9 @@ export const PanelContextProvider: FC = ({ children }) => {
   const [color, setColor] = useState<string>(initialContext.color);
   const [padding, setPadding] = useState<PaddingSetting>(initialContext.padding);
   const [font, setFont] = useState<FontSetting>(initialContext.font);
+  const [language, setLanguage] = useState<ILanguage>(initialContext.language);
+  const [predictions, setPredictions] = useState<ILanguage>(initialContext.predictions);
+  const [exportSize, setExportSize] = useState<ExportSize>(initialContext.exportSize);
 
   return (
     <PanelContext.Provider
@@ -60,13 +76,19 @@ export const PanelContextProvider: FC = ({ children }) => {
         color,
         padding,
         font,
+        language,
+        predictions,
+        exportSize,
         setDarkMode: toggleColorMode,
         setLineNumber,
         setBackground,
         setMaxWidth,
         setColor,
         setPadding,
-        setFont
+        setFont,
+        setLanguage,
+        setPredictions,
+        setExportSize
       }}
     >
       {children}

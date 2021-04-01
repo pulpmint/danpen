@@ -7,3 +7,10 @@ export type FontSetting =
   | "Source Code Pro"
   | "Space Mono"
   | "Ubuntu Mono";
+
+export type ExportSize = 2 | 3 | 4;
+
+export interface IExportOptions {
+  value: ExportSize;
+  label: string;
+}

@@ -1,10 +1,14 @@
-import { Box, Container } from "@chakra-ui/layout";
-import { FC } from "react";
+import { Box } from "@chakra-ui/layout";
+import { ScaleFade } from "@chakra-ui/transition";
+import { FC, useEffect, useState } from "react";
 import usePanelSettings from "../hooks/usePanelSettings";
+import CodeEditor from "./CodeEditor";
 import WindowControls from "./WindowControls";
 
 const CodeWindow: FC = () => {
-  const { darkMode, background, lineNumber, maxWidth, color, padding, font } = usePanelSettings();
+  const { darkMode, background, color, padding } = usePanelSettings();
+
+  const [mounted, setMounted] = useState<boolean>(false);
 
   const getBackgroundColor = (): string => {
     return darkMode ? "gray.800" : "gray.200";
@@ -21,43 +25,40 @@ const CodeWindow: FC = () => {
     return gradient;
   };
 
+  useEffect(() => {
+    setTimeout(() => setMounted(true), 250);
+  }, []);2
+
   return (
-    <>
+    <Box id="danpen">
       <Box
         zIndex="-1"
-        position="fixed"
+        position="absolute"
+        height="full"
+        minHeight="100vh"
         top="0"
-        bottom="0"
         left="0"
         right="0"
         bgGradient={getGradient()}
       ></Box>
 
-      <Container
-        maxWidth={`container.${maxWidth ? "lg" : "md"}`}
-        padding={padding}
-        marginTop="16"
-        marginBottom="16"
-        marginLeft="auto"
-        marginRight="auto"
-        backgroundColor="blackAlpha.50"
-      >
-        <Box
-          minHeight="md"
-          padding="4"
-          borderRadius="md"
-          boxShadow="xl"
-          backgroundColor={getBackgroundColor()}
-        >
-          <WindowControls />
+      <ScaleFade in={mounted}>
+        <Box width="full" padding={padding} backgroundColor="blackAlpha.50">
+          <Box
+            width="full"
+            minHeight="max-content"
+            padding="4"
+            borderRadius="md"
+            boxShadow="xl"
+            backgroundColor={getBackgroundColor()}
+          >
+            <WindowControls />
 
-          <code style={{ fontFamily: font }}>
-            <span style={{ opacity: 0.5 }}>{lineNumber ? `1. ` : null}</span>
-            console.log("Hello");
-          </code>
+            <CodeEditor />
+          </Box>
         </Box>
-      </Container>
-    </>
+      </ScaleFade>
+    </Box>
   );
 };
 
