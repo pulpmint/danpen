@@ -15,6 +15,11 @@ const CodeMirrorTheme: FC = () => {
 
   return (
     <style jsx global>{`
+      // before animation
+      body {
+        overflow: hidden;
+      }
+
       // default override
       .CodeMirror {
         font-family: ${font}, monospace !important;

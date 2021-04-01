@@ -62,6 +62,7 @@ const Panel: FC = () => {
 
   useEffect(() => {
     setTimeout(() => setMounted(true), 500);
+    document.querySelector("body").style.overflowY = "auto";
   }, []);
 
   return (
