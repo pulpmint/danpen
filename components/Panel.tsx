@@ -1,16 +1,14 @@
-import { IconButton } from "@chakra-ui/button";
 import { Box, Container } from "@chakra-ui/layout";
 import { FC } from "react";
-import { Layers, List, Maximize, Moon, Save } from "react-feather";
+import { Layers, List, Maximize, Moon } from "react-feather";
 import { FONTSTYLE, PADDING } from "../constants/panelSettings";
 import usePanelSettings from "../hooks/usePanelSettings";
 import { IToggleButton } from "../types/ToggleButton";
 import ColorPicker from "./ColorPicker";
 import CustomSelect from "./CustomSelect";
+import DownloadDialog from "./Download";
 import LanguagePicker from "./LanguagePicker";
 import ToggleButton from "./ToggleButton";
-
-import domToImage from "../public/js/domToImage";
 
 const Panel: FC = () => {
   const {
@@ -27,8 +25,6 @@ const Panel: FC = () => {
     setPadding,
     setFont
   } = usePanelSettings();
-
-  const exportSize: number = 2;
 
   const toggleOptions: IToggleButton[] = [
     {
@@ -59,44 +55,6 @@ const Panel: FC = () => {
 
   const getBackgroundColor = (): string => {
     return darkMode ? "gray.900" : "gray.100";
-  };
-
-  const exportImage = async () => {
-    if (document && window) {
-      const link = document.createElement("a");
-
-      const config = {
-        style: {
-          transform: `scale(${exportSize})`,
-          "transform-origin": "top left",
-          background: "none"
-        },
-        filter: n => {
-          if (n.className) {
-            const className = String(n.className);
-            if (className.includes("eliminateOnRender")) {
-              return false;
-            }
-            if (className.includes("CodeMirror-cursors")) {
-              return false;
-            }
-          }
-          return true;
-        },
-        width: document.getElementById("danpen").offsetWidth * exportSize,
-        height: document.getElementById("danpen").offsetHeight * exportSize
-      };
-
-      const base64 = await domToImage.toPng(document.getElementById("danpen"), config);
-
-      link.href = base64;
-      link.download = "Danpen.png";
-
-      document.body.appendChild(link);
-
-      link.click();
-      link.remove();
-    }
   };
 
   return (
@@ -141,13 +99,7 @@ const Panel: FC = () => {
           <LanguagePicker />
         </Box>
 
-        <IconButton
-          colorScheme="green"
-          borderRadius="full"
-          aria-label="Download Image"
-          icon={<Save size={20} />}
-          onClick={() => exportImage()}
-        />
+        <DownloadDialog />
       </Container>
     </Container>
   );
