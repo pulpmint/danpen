@@ -26,9 +26,10 @@ const CodeWindow: FC = () => {
     <Box id="danpen">
       <Box
         zIndex="-1"
-        position="fixed"
+        position="absolute"
+        height="full"
+        minHeight="100vh"
         top="0"
-        bottom="0"
         left="0"
         right="0"
         bgGradient={getGradient()}
