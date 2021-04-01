@@ -3,7 +3,7 @@ import { createContext, FC, useState } from "react";
 import { GRADIENTS } from "../constants/gradients";
 import { ILanguage, LANGUAGES } from "../constants/languages";
 import { PADDING, FONTSTYLE } from "../constants/panelSettings";
-import { FontSetting, PaddingSetting } from "../types/PanelSettings";
+import { FontSetting, PaddingSetting, ExportSize } from "../types/PanelSettings";
 
 export interface IPanelContext {
   darkMode: boolean;
@@ -15,6 +15,7 @@ export interface IPanelContext {
   font: FontSetting;
   language: ILanguage;
   predictions: ILanguage;
+  exportSize: ExportSize;
   setDarkMode: Function;
   setLineNumber: Function;
   setBackground: Function;
@@ -24,6 +25,7 @@ export interface IPanelContext {
   setFont: Function;
   setLanguage: Function;
   setPredictions: Function;
+  setExportSize: Function;
 }
 
 const initialContext: IPanelContext = {
@@ -36,6 +38,7 @@ const initialContext: IPanelContext = {
   font: FONTSTYLE[0],
   language: LANGUAGES[0],
   predictions: null,
+  exportSize: 3,
   setDarkMode: () => {},
   setLineNumber: () => {},
   setBackground: () => {},
@@ -44,7 +47,8 @@ const initialContext: IPanelContext = {
   setPadding: () => {},
   setFont: () => {},
   setLanguage: () => {},
-  setPredictions: () => {}
+  setPredictions: () => {},
+  setExportSize: () => {}
 };
 
 const PanelContext = createContext<IPanelContext>(initialContext);
@@ -60,6 +64,7 @@ export const PanelContextProvider: FC = ({ children }) => {
   const [font, setFont] = useState<FontSetting>(initialContext.font);
   const [language, setLanguage] = useState<ILanguage>(initialContext.language);
   const [predictions, setPredictions] = useState<ILanguage>(initialContext.predictions);
+  const [exportSize, setExportSize] = useState<ExportSize>(initialContext.exportSize);
 
   return (
     <PanelContext.Provider
@@ -73,6 +78,7 @@ export const PanelContextProvider: FC = ({ children }) => {
         font,
         language,
         predictions,
+        exportSize,
         setDarkMode: toggleColorMode,
         setLineNumber,
         setBackground,
@@ -81,7 +87,8 @@ export const PanelContextProvider: FC = ({ children }) => {
         setPadding,
         setFont,
         setLanguage,
-        setPredictions
+        setPredictions,
+        setExportSize
       }}
     >
       {children}
