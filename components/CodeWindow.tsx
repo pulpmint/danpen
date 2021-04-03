@@ -2,11 +2,13 @@ import { Box } from "@chakra-ui/layout";
 import { ScaleFade } from "@chakra-ui/transition";
 import { FC, useEffect, useState } from "react";
 import usePanelSettings from "../hooks/usePanelSettings";
+import useWindowSize from "../hooks/useWindowSize";
 import CodeEditor from "./CodeEditor";
 import WindowControls from "./WindowControls";
 
 const CodeWindow: FC = () => {
   const { darkMode, background, color, padding } = usePanelSettings();
+  const { height } = useWindowSize();
 
   const [mounted, setMounted] = useState<boolean>(false);
 
@@ -26,7 +28,7 @@ const CodeWindow: FC = () => {
           zIndex="-1"
           position="absolute"
           height="full"
-          minHeight="100vh"
+          minHeight={height}
           top="0"
           left="0"
           right="0"
