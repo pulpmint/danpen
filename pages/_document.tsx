@@ -1,14 +1,13 @@
 import { ColorModeScript, theme } from "@chakra-ui/react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { CDN_VERSION_CONSTANT } from "../constants/misc";
-import { SEO_DESCRIPTION, SEO_TITLE } from "../constants/seo";
+import { SEO_DESCRIPTION } from "../constants/seo";
 
 class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
         <Head>
-          <title>{SEO_TITLE}</title>
           <meta name="description" content={SEO_DESCRIPTION} />
 
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
