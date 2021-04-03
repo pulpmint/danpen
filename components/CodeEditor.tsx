@@ -95,6 +95,7 @@ const CodeEditor: FC = () => {
 
   return (
     <textarea
+      placeholder={DEF_CODE}
       ref={editorRef}
       value={code}
       onChange={() => console.warn("Something has changed!")}
