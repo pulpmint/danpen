@@ -19,7 +19,6 @@ const CodeWindow: FC = () => {
   useEffect(() => {
     setTimeout(() => setMounted(true), 250);
   }, []);
-  2;
 
   return (
     <Box id="danpen">
