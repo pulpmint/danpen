@@ -14,7 +14,7 @@ const ColorPicker: FC = () => {
   return (
     <Menu>
       <Tooltip isDisabled={false} label={background ? "Select Theme" : "Background Disabled"}>
-        <Box marginRight="4">
+        <Box mr="4">
           <MenuButton
             disabled={!background}
             size="sm"

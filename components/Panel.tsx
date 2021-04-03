@@ -70,7 +70,7 @@ const Panel: FC = () => {
       <Container position="fixed" bottom="8" maxWidth="full" zIndex="1000">
         <Container
           maxWidth="container.lg"
-          padding="4"
+          p="4"
           borderRadius="lg"
           boxShadow="md"
           backgroundColor={getBackgroundColor()}

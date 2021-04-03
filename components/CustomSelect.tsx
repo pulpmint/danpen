@@ -12,13 +12,13 @@ interface CustomSelectProps {
 
 const CustomSelect: FC<CustomSelectProps> = ({ label, value, list, changeValue }) => {
   return (
-    <Box marginRight="4">
-      <Text marginBottom="1" fontSize="sm" fontWeight="medium" textColor="gray">
+    <Box mr="4">
+      <Text mb="1" fontSize="sm" fontWeight="medium" textColor="gray">
         {label}
       </Text>
 
       <Menu>
-        <MenuButton marginRight="4" size="xs" as={Button}>
+        <MenuButton mr="4" size="xs" as={Button}>
           {value}
         </MenuButton>
 

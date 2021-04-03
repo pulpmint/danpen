@@ -14,13 +14,13 @@ const LanguagePicker: FC = () => {
   };
 
   return (
-    <Box marginRight="4">
-      <Text marginBottom="1" fontSize="sm" fontWeight="medium" textColor="gray">
+    <Box mr="4">
+      <Text mb="1" fontSize="sm" fontWeight="medium" textColor="gray">
         Language
       </Text>
 
       <Menu>
-        <MenuButton marginRight="4" size="xs" as={Button}>
+        <MenuButton mr="4" size="xs" as={Button}>
           {getLabel()}
         </MenuButton>
 
