@@ -31,7 +31,7 @@ const CodeWindow: FC = () => {
           top="0"
           left="0"
           right="0"
-          bgGradient={color}
+          bgGradient={color.value}
         ></Box>
       )}
 

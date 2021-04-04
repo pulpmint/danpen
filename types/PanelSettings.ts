@@ -1,3 +1,8 @@
+export interface Gradient {
+  name: string;
+  value: string;
+}
+
 export type PaddingSetting = 8 | 16 | 32;
 
 export type FontSetting =

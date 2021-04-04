@@ -29,7 +29,7 @@ function App({ Component, pageProps }: AppProps) {
             <CSSReset />
             <PanelContextProvider>
               <Box opacity={opacity}>
-                {!!width && width > 768 ? (
+                {!!width && width >= 768 ? (
                   <>
                     <FontFaces />
                     <CodeMirrorTheme />

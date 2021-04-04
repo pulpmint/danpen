@@ -21,7 +21,7 @@ const ColorPicker: FC = () => {
             as={Button}
             rightIcon={<ChevronDown size={18} />}
           >
-            <ColorDetail color={color} label="Color" />
+            <ColorDetail color={color.value} label="Theme" />
           </MenuButton>
         </Box>
       </Tooltip>
@@ -29,7 +29,7 @@ const ColorPicker: FC = () => {
       <MenuList>
         {GRADIENTS.map((gradient, index) => (
           <MenuItem key={index} onClick={() => setColor(gradient)}>
-            <ColorDetail color={gradient} label={`Color Scheme ${index + 1}`} />
+            <ColorDetail color={gradient.value} label={gradient.name} />
           </MenuItem>
         ))}
       </MenuList>

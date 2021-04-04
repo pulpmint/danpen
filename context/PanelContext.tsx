@@ -3,14 +3,14 @@ import { createContext, FC, useState } from "react";
 import { GRADIENTS } from "../constants/gradients";
 import { ILanguage, LANGUAGES } from "../constants/languages";
 import { PADDING, FONTSTYLE } from "../constants/panelSettings";
-import { FontSetting, PaddingSetting, ExportSize } from "../types/PanelSettings";
+import { FontSetting, Gradient, PaddingSetting, ExportSize } from "../types/PanelSettings";
 
 export interface IPanelContext {
   darkMode: boolean;
   lineNumber: boolean;
   background: boolean;
   maxWidth: boolean;
-  color: string;
+  color: Gradient;
   padding: PaddingSetting;
   font: FontSetting;
   language: ILanguage;
@@ -59,7 +59,7 @@ export const PanelContextProvider: FC = ({ children }) => {
   const [lineNumber, setLineNumber] = useState<boolean>(initialContext.lineNumber);
   const [background, setBackground] = useState<boolean>(initialContext.background);
   const [maxWidth, setMaxWidth] = useState<boolean>(initialContext.maxWidth);
-  const [color, setColor] = useState<string>(initialContext.color);
+  const [color, setColor] = useState<Gradient>(initialContext.color);
   const [padding, setPadding] = useState<PaddingSetting>(initialContext.padding);
   const [font, setFont] = useState<FontSetting>(initialContext.font);
   const [language, setLanguage] = useState<ILanguage>(initialContext.language);
