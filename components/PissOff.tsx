@@ -10,7 +10,7 @@ const PissOff: FC = () => {
       <Heading mb="4">🛑 Stop right here!</Heading>
 
       <Text>
-        No one writes code on their mobile phones 📱 so I didn't solve a problem 🖕 that never
+        No one writes code on their mobile phones 📱 so I didn't solve a problem that never
         existed. Open you 💻 laptop. And yes, I'm lazy.
       </Text>
     </Container>
