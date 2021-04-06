@@ -17,7 +17,7 @@ class MyDocument extends Document {
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={SEO_TITLE} />
           <meta name="twitter:description" content={SEO_DESCRIPTION} />
-          <meta property="twitter:image" content="/cover.png" />
+          <meta name="twitter:image" content="/cover.png" />
 
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
           <link rel="stylesheet" href={`${CDN_VERSION_CONSTANT}/codemirror.min.css`} />
