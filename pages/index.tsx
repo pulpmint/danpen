@@ -1,5 +1,6 @@
 import { Container } from "@chakra-ui/layout";
 import { FC } from "react";
+import NavBar from "../components/NavBar";
 import CodeWindow from "../components/CodeWindow";
 import Panel from "../components/Panel";
 import usePanelSettings from "../hooks/usePanelSettings";
@@ -10,6 +11,8 @@ const Home: FC = () => {
   return (
     <>
       <main>
+        <NavBar />
+
         <Container
           zIndex="popover"
           minHeight="100vh"
