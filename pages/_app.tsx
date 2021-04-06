@@ -9,6 +9,7 @@ import { PanelContextProvider } from "../context/PanelContext";
 import useWindowSize from "../hooks/useWindowSize";
 import CodeMirrorTheme from "../styles/CodeMirrorTheme";
 import FontFaces from "../styles/FontFaces";
+import MarkDownTheme from "../styles/MarkDownTheme";
 
 function App({ Component, pageProps }: AppProps) {
   const { width } = useWindowSize();
@@ -32,6 +33,7 @@ function App({ Component, pageProps }: AppProps) {
                 {!!width && width >= 768 ? (
                   <>
                     <FontFaces />
+                    <MarkDownTheme />
                     <CodeMirrorTheme />
                     <Component {...pageProps} />
                   </>

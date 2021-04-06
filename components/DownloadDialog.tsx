@@ -88,17 +88,17 @@ const DownloadDialog: FC = () => {
           <Divider />
 
           <ModalBody>
-            <Text mt={2} mb={4}>
+            <Text mt="2" mb="4">
               We all say size doesn't matter but it's not true and we all know it. Select a size to
               download.
             </Text>
 
-            <Box display="flex" alignItems="center" mb={4}>
+            <Box display="flex" alignItems="center" mb="4">
               {EXPORTSIZE.map(size => (
                 <Button
                   key={size.value}
                   size="xs"
-                  mr={2}
+                  mr="2"
                   colorScheme={exportSize === size.value ? "green" : "gray"}
                   onClick={() => exportImage(size.value)}
                 >

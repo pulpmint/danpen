@@ -50,8 +50,7 @@ const CodeEditor: FC = () => {
   };
 
   useEffect(() => {
-    // @ts-expect-error
-    if (editorRef.current && !window.editor) {
+    if (editorRef.current) {
       editorRef.current.classList.remove("chakra-textarea");
       editorRef.current.classList.remove("css-ofmset");
       editorRef.current.classList.add("code-editor");
