@@ -1,11 +1,26 @@
 import { IconButton } from "@chakra-ui/button";
-import { Box, Heading } from "@chakra-ui/layout";
+import { Box, Heading, Link } from "@chakra-ui/layout";
 import { Modal, ModalBody, ModalContent, ModalOverlay } from "@chakra-ui/modal";
-import { FC, useState } from "react";
-import { AtSign, X } from "react-feather";
+import { Tooltip } from "@chakra-ui/tooltip";
+import { FC, ReactNode, useState } from "react";
+import { AtSign, Twitter, X } from "react-feather";
 import ReactMarkdown from "react-markdown";
 import { aboutMarkdown } from "../constants/about";
 import usePanelSettings from "../hooks/usePanelSettings";
+
+export interface SocialTags {
+  link: string;
+  label: string;
+  icon: ReactNode;
+}
+
+export const social: SocialTags[] = [
+  {
+    link: "https://twitter.com/pulpmint",
+    label: "Say 👋 on Twitter",
+    icon: <Twitter size={20} />
+  }
+];
 
 const AboutDialog: FC = () => {
   const { darkMode } = usePanelSettings();
@@ -68,6 +83,21 @@ const AboutDialog: FC = () => {
                 className="markdown-theme"
               />
             </Box>
+
+            {social.map(site => (
+              <Tooltip label={site.label}>
+                <Link
+                  isExternal
+                  href={site.link}
+                  color="twitter.500"
+                  position="absolute"
+                  bottom="8"
+                  right="8"
+                >
+                  {site.icon}
+                </Link>
+              </Tooltip>
+            ))}
           </ModalBody>
         </ModalContent>
       </Modal>

@@ -10,14 +10,12 @@ class MyDocument extends Document {
         <Head>
           <meta name="description" content={SEO_DESCRIPTION} />
 
-          <meta property="og:title" content={SEO_TITLE} />
-          <meta property="og:description" content={SEO_TITLE} />
-          <meta property="og:image" content="/cover.png" />
-
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={SEO_TITLE} />
-          <meta name="twitter:description" content={SEO_DESCRIPTION} />
-          <meta name="twitter:image" content="/cover.png" />
+          <meta name="twitter:creator" content="@pulpmint" />
+
+          <meta property="og:title" content={SEO_TITLE} key="ogtitle" />
+          <meta property="og:description" content={SEO_TITLE} key="ogdesc" />
+          <meta property="og:image" content="/images/cover.png" key="ogimage" />
 
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
           <link rel="stylesheet" href={`${CDN_VERSION_CONSTANT}/codemirror.min.css`} />
