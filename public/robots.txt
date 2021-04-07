@@ -1,7 +1,4 @@
-User-agent: Twitterbot
-Disallow:
-
 User-agent: *
-Disallow: /
+Allow: /
 
-Sitemap: http://www.example.com/sitemap.xml
+Sitemap: http://www.danpen.wtf/sitemap.xml
