@@ -1,6 +1,7 @@
 User-agent: Twitterbot
-Disallow: *
+Disallow:
 
-Allow: /images
+User-agent: *
+Disallow: /
 
 Sitemap: http://www.example.com/sitemap.xml
