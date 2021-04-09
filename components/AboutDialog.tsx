@@ -4,6 +4,7 @@ import { Modal, ModalBody, ModalContent, ModalOverlay } from "@chakra-ui/modal";
 import { Tooltip } from "@chakra-ui/tooltip";
 import { FC, ReactNode, useState } from "react";
 import { AtSign, Twitter, X } from "react-feather";
+import { event } from "react-ga";
 import ReactMarkdown from "react-markdown";
 import { aboutMarkdown } from "../constants/about";
 import usePanelSettings from "../hooks/usePanelSettings";
@@ -11,13 +12,15 @@ import usePanelSettings from "../hooks/usePanelSettings";
 export interface SocialTags {
   link: string;
   label: string;
+  service: string;
   icon: ReactNode;
 }
 
-export const social: SocialTags[] = [
+const social: SocialTags[] = [
   {
     link: "https://twitter.com/pulpmint",
     label: "Say 👋 on Twitter",
+    service: "Twitter",
     icon: <Twitter size={20} />
   }
 ];
@@ -26,6 +29,10 @@ const AboutDialog: FC = () => {
   const { darkMode } = usePanelSettings();
 
   const [open, setOpen] = useState<boolean>(false);
+
+  const handleSocailAnalytics = (site: SocialTags) => {
+    event({ category: "Social", action: site.service });
+  };
 
   return (
     <>
@@ -84,8 +91,8 @@ const AboutDialog: FC = () => {
               />
             </Box>
 
-            {social.map((site, index) => (
-              <Tooltip key={index} label={site.label}>
+            {social.map(site => (
+              <Tooltip key={site.service} label={site.label}>
                 <Link
                   isExternal
                   href={site.link}
@@ -93,6 +100,7 @@ const AboutDialog: FC = () => {
                   position="absolute"
                   bottom="8"
                   right="8"
+                  onClick={() => handleSocailAnalytics(site)}
                 >
                   {site.icon}
                 </Link>
