@@ -11,7 +11,6 @@ const Home: FC = () => {
 
   useEffect(() => {
     pageview("/");
-    console.log("Page viewed: /");
   }, []);
 
   return (
