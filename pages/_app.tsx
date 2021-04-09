@@ -21,7 +21,6 @@ function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     try {
-      console.log(process.env.NEXT_PUBLIC_GA);
       initialize(process.env.NEXT_PUBLIC_GA);
     } catch (e) {
       console.log(e);
