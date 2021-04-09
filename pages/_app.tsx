@@ -2,6 +2,7 @@ import { Box, ChakraProvider, CSSReset, ThemeProvider } from "@chakra-ui/react";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { initialize } from "react-ga";
 import PissOff from "../components/PissOff";
 import { theme } from "../config/theme";
 import { SEO_TITLE } from "../constants/seo";
@@ -17,6 +18,19 @@ function App({ Component, pageProps }: AppProps) {
   const [opacity, setOpacity] = useState<number>(0);
 
   useEffect(() => setOpacity(1), []);
+
+  useEffect(() => {
+    try {
+      const googleAnalytics =
+        process.env.NODE_ENV === "development"
+          ? process.env.NEXT_PUBLIC_GA_DEVELOPMENT
+          : process.env.NEXT_PUBLIC_GA_PRODUCTION;
+
+      initialize(googleAnalytics);
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
 
   return (
     <>
