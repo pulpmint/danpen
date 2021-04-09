@@ -84,8 +84,8 @@ const AboutDialog: FC = () => {
               />
             </Box>
 
-            {social.map(site => (
-              <Tooltip label={site.label}>
+            {social.map((site, index) => (
+              <Tooltip key={index} label={site.label}>
                 <Link
                   isExternal
                   href={site.link}
