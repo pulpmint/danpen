@@ -4,11 +4,12 @@ import { Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay } from "@chak
 import { Tooltip } from "@chakra-ui/tooltip";
 import { FC, useState } from "react";
 import { Image, X } from "react-feather";
+import { event } from "react-ga";
 import { EXPORTSIZE } from "../constants/panelSettings";
 import usePanelSettings from "../hooks/usePanelSettings";
 
 import domToImage from "../public/js/domToImage";
-import { ExportSize } from "../types/PanelSettings";
+import { ExportSize, IExportOptions } from "../types/PanelSettings";
 
 const DownloadDialog: FC = () => {
   const { exportSize, setExportSize } = usePanelSettings();
@@ -56,6 +57,10 @@ const DownloadDialog: FC = () => {
     setOpen(false);
   };
 
+  const handleDownloadAnalytics = (download: IExportOptions) => {
+    event({ category: "Download", action: download.label, value: download.value - 1 });
+  };
+
   return (
     <>
       <Tooltip label="Download Image">
@@ -100,7 +105,10 @@ const DownloadDialog: FC = () => {
                   size="xs"
                   mr="2"
                   colorScheme={exportSize === size.value ? "green" : "gray"}
-                  onClick={() => exportImage(size.value)}
+                  onClick={() => {
+                    handleDownloadAnalytics(size);
+                    exportImage(size.value);
+                  }}
                 >
                   {size.label}
                 </Button>
