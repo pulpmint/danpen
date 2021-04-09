@@ -5,6 +5,7 @@ import { Tooltip } from "@chakra-ui/tooltip";
 import { FC, useState } from "react";
 import { Image, X } from "react-feather";
 import { event } from "react-ga";
+import { SHOT_COUNT } from "../constants/localStorage";
 import { EXPORTSIZE } from "../constants/panelSettings";
 import usePanelSettings from "../hooks/usePanelSettings";
 
@@ -18,6 +19,10 @@ const DownloadDialog: FC = () => {
 
   const exportImage = async (scale: ExportSize) => {
     if (document && window) {
+      let count: number = parseInt(localStorage.getItem(SHOT_COUNT));
+
+      if (isNaN(count)) count = 0;
+
       const link = document.createElement("a");
 
       const config = {
@@ -51,6 +56,8 @@ const DownloadDialog: FC = () => {
 
       link.click();
       link.remove();
+
+      localStorage.setItem(SHOT_COUNT, (count + 1).toString());
     }
 
     setExportSize(scale);
@@ -58,7 +65,11 @@ const DownloadDialog: FC = () => {
   };
 
   const handleDownloadAnalytics = (download: IExportOptions) => {
-    event({ category: "Download", action: download.label, value: download.value - 1 });
+    event({
+      category: "Download",
+      action: download.label,
+      value: parseInt(localStorage.getItem("shot"))
+    });
   };
 
   return (
@@ -106,8 +117,8 @@ const DownloadDialog: FC = () => {
                   mr="2"
                   colorScheme={exportSize === size.value ? "green" : "gray"}
                   onClick={() => {
-                    handleDownloadAnalytics(size);
                     exportImage(size.value);
+                    handleDownloadAnalytics(size);
                   }}
                 >
                   {size.label}
