@@ -34,6 +34,10 @@ const AboutDialog: FC = () => {
     event({ category: "Social", action: site.service });
   };
 
+  const handleExploreAnalytics = (action: string) => {
+    event({ category: "Explore", action });
+  };
+
   return (
     <>
       <IconButton
@@ -42,7 +46,10 @@ const AboutDialog: FC = () => {
         colorScheme="blackAlpha"
         borderRadius="full"
         icon={<AtSign size={16} />}
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          handleExploreAnalytics("About");
+          setOpen(true);
+        }}
       />
 
       <Modal
