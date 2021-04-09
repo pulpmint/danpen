@@ -21,12 +21,8 @@ function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     try {
-      const googleAnalytics =
-        process.env.NODE_ENV === "development"
-          ? process.env.NEXT_PUBLIC_GA_DEVELOPMENT
-          : process.env.NEXT_PUBLIC_GA_PRODUCTION;
-
-      initialize(googleAnalytics);
+      console.log(process.env.NEXT_PUBLIC_GA);
+      initialize(process.env.NEXT_PUBLIC_GA);
     } catch (e) {
       console.log(e);
     }
