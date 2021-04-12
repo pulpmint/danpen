@@ -65,10 +65,12 @@ const DownloadDialog: FC = () => {
   };
 
   const handleDownloadAnalytics = (download: IExportOptions) => {
+    const count = parseInt(localStorage.getItem("shot"));
+
     event({
       category: "Download",
       action: download.label,
-      value: parseInt(localStorage.getItem("shot"))
+      // value: count
     });
   };
 
