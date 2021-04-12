@@ -66,10 +66,6 @@ const DownloadDialog: FC = () => {
   const handleDownloadAnalytics = (download: IExportOptions) => {
     const count = getShotCount();
 
-    console.log(count);
-
-    console.log("sending data to analytics...");
-
     event({
       category: "Download",
       action: download.label,
