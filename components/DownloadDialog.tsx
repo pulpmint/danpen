@@ -117,8 +117,8 @@ const DownloadDialog: FC = () => {
                   mr="2"
                   colorScheme={exportSize === size.value ? "green" : "gray"}
                   onClick={() => {
-                    exportImage(size.value);
                     handleDownloadAnalytics(size);
+                    exportImage(size.value);
                   }}
                 >
                   {size.label}
