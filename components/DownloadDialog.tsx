@@ -11,6 +11,7 @@ import usePanelSettings from "../hooks/usePanelSettings";
 
 import domToImage from "../public/js/domToImage";
 import { ExportSize, IExportOptions } from "../types/PanelSettings";
+import { getShotCount } from "../utils/misc";
 
 const DownloadDialog: FC = () => {
   const { exportSize, setExportSize } = usePanelSettings();
@@ -19,9 +20,7 @@ const DownloadDialog: FC = () => {
 
   const exportImage = async (scale: ExportSize) => {
     if (document && window) {
-      let count: number = parseInt(localStorage.getItem(SHOT_COUNT));
-
-      if (isNaN(count)) count = 0;
+      const count = getShotCount();
 
       const link = document.createElement("a");
 
@@ -65,12 +64,16 @@ const DownloadDialog: FC = () => {
   };
 
   const handleDownloadAnalytics = (download: IExportOptions) => {
-    const count = parseInt(localStorage.getItem("shot"));
+    const count = getShotCount();
+
+    console.log(count);
+
+    console.log("sending data to analytics...");
 
     event({
       category: "Download",
       action: download.label,
-      // value: count
+      value: count
     });
   };
 
