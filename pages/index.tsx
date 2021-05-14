@@ -1,17 +1,12 @@
 import { Container } from "@chakra-ui/layout";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import NavBar from "../components/NavBar";
 import CodeWindow from "../components/CodeWindow";
 import Panel from "../components/Panel";
 import usePanelSettings from "../hooks/usePanelSettings";
-import { pageview } from "react-ga";
 
 const Home: FC = () => {
   const { maxWidth } = usePanelSettings();
-
-  useEffect(() => {
-    pageview("/");
-  }, []);
 
   return (
     <>

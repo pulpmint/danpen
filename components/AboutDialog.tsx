@@ -4,7 +4,6 @@ import { Modal, ModalBody, ModalContent, ModalOverlay } from "@chakra-ui/modal";
 import { Tooltip } from "@chakra-ui/tooltip";
 import { FC, ReactNode, useState } from "react";
 import { AtSign, Twitter, X } from "react-feather";
-import { event } from "react-ga";
 import ReactMarkdown from "react-markdown";
 import { aboutMarkdown } from "../constants/about";
 import usePanelSettings from "../hooks/usePanelSettings";
@@ -30,14 +29,6 @@ const AboutDialog: FC = () => {
 
   const [open, setOpen] = useState<boolean>(false);
 
-  const handleSocailAnalytics = (site: SocialTags) => {
-    event({ category: "Social", action: site.service });
-  };
-
-  const handleExploreAnalytics = (action: string) => {
-    event({ category: "Explore", action });
-  };
-
   return (
     <>
       <IconButton
@@ -46,10 +37,7 @@ const AboutDialog: FC = () => {
         colorScheme="blackAlpha"
         borderRadius="full"
         icon={<AtSign size={16} />}
-        onClick={() => {
-          handleExploreAnalytics("About");
-          setOpen(true);
-        }}
+        onClick={() => setOpen(true)}
       />
 
       <Modal
@@ -107,7 +95,6 @@ const AboutDialog: FC = () => {
                   position="absolute"
                   bottom="8"
                   right="8"
-                  onClick={() => handleSocailAnalytics(site)}
                 >
                   {site.icon}
                 </Link>
