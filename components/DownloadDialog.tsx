@@ -4,14 +4,10 @@ import { Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay } from "@chak
 import { Tooltip } from "@chakra-ui/tooltip";
 import { FC, useState } from "react";
 import { Image, X } from "react-feather";
-import { event } from "react-ga";
-import { SHOT_COUNT } from "../constants/localStorage";
 import { EXPORTSIZE } from "../constants/panelSettings";
 import usePanelSettings from "../hooks/usePanelSettings";
-
 import domToImage from "../public/js/domToImage";
-import { ExportSize, IExportOptions } from "../types/PanelSettings";
-import { getShotCount } from "../utils/misc";
+import { ExportSize } from "../types/PanelSettings";
 
 const DownloadDialog: FC = () => {
   const { exportSize, setExportSize } = usePanelSettings();
@@ -20,8 +16,6 @@ const DownloadDialog: FC = () => {
 
   const exportImage = async (scale: ExportSize) => {
     if (document && window) {
-      const count = getShotCount();
-
       const link = document.createElement("a");
 
       const config = {
@@ -55,22 +49,10 @@ const DownloadDialog: FC = () => {
 
       link.click();
       link.remove();
-
-      localStorage.setItem(SHOT_COUNT, (count + 1).toString());
     }
 
     setExportSize(scale);
     setOpen(false);
-  };
-
-  const handleDownloadAnalytics = (download: IExportOptions) => {
-    const count = getShotCount();
-
-    event({
-      category: "Download",
-      action: download.label,
-      value: count
-    });
   };
 
   return (
@@ -117,10 +99,7 @@ const DownloadDialog: FC = () => {
                   size="xs"
                   mr="2"
                   colorScheme={exportSize === size.value ? "green" : "gray"}
-                  onClick={() => {
-                    handleDownloadAnalytics(size);
-                    exportImage(size.value);
-                  }}
+                  onClick={() => exportImage(size.value)}
                 >
                   {size.label}
                 </Button>

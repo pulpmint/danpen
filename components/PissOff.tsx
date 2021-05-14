@@ -1,14 +1,9 @@
 import { Container, Heading, Text } from "@chakra-ui/layout";
-import { FC, useEffect } from "react";
-import { event } from "react-ga";
+import { FC } from "react";
 import useWindowSize from "../hooks/useWindowSize";
 
 const PissOff: FC = () => {
   const { height } = useWindowSize();
-
-  useEffect(() => {
-    event({ category: "Misc", action: "Mobile" });
-  }, []);
 
   return (
     <Container display="flex" flexDirection="column" justifyContent="center" height={height}>
