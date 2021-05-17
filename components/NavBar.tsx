@@ -1,7 +1,6 @@
-import { Img } from "@chakra-ui/image";
 import { Box, Container } from "@chakra-ui/layout";
 import { FC } from "react";
-import { SEO_DESCRIPTION } from "../constants/seo";
+import Logo from "../assets/SVGs/Logo";
 import AboutDialog from "./AboutDialog";
 
 const NavBar: FC = () => {
@@ -15,7 +14,7 @@ const NavBar: FC = () => {
         justifyContent="space-between"
       >
         <Box height="32px" width="32px" p="2" backgroundColor="gray.900" borderRadius="full">
-          <Img width="16px" height="16px" src="/images/icon-logo.png" alt={SEO_DESCRIPTION} />
+          <Logo size={16} />
         </Box>
 
         <AboutDialog />
