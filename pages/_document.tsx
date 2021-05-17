@@ -27,7 +27,19 @@ class MyDocument extends Document {
           <meta property="og:description" content={SEO_TITLE} key="ogdesc" />
           <meta property="og:image" content={SEO_IMAGE} key="ogimage" />
 
-          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+          <link rel="preconnect" href="https://rsms.me/" />
+          <link rel="preload" as="style" href="https://rsms.me/inter/inter.css" />
+          <link
+            rel="stylesheet"
+            href="https://rsms.me/inter/inter.css"
+            media="print"
+            // @ts-expect-error
+            onLoad="this.media='all'"
+          />
+          <noscript>
+            <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+          </noscript>
+
           <link rel="stylesheet" href={`${CDN_VERSION_CONSTANT}/codemirror.min.css`} />
           <script src={`${CDN_VERSION_CONSTANT}/codemirror.min.js`}></script>
           <script src={`${CDN_VERSION_CONSTANT}/mode/meta.min.js`}></script>
