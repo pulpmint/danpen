@@ -40,8 +40,9 @@ const AboutDialog: FC = () => {
       <IconButton
         size="sm"
         aria-label="About"
-        colorScheme="blackAlpha"
-        borderRadius="full"
+        colorScheme="gray"
+        color="white"
+        rounded="full"
         icon={<AtSign size={16} />}
         onClick={() => setOpen(true)}
       />
@@ -55,14 +56,14 @@ const AboutDialog: FC = () => {
       >
         <ModalOverlay />
 
-        <ModalContent overflow="hidden">
+        <ModalContent overflow="hidden" bgColor="gray.800">
           <ModalBody>
             <Box
               position="absolute"
               top="0"
               left="0"
               right="0"
-              backgroundColor={darkMode ? "gray.900" : "gray.50"}
+              backgroundColor={darkMode ? "gray.900" : "gray.100"}
               minHeight="48"
               display="flex"
               alignItems="flex-end"
