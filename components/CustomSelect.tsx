@@ -23,7 +23,7 @@ const CustomSelect: FC<CustomSelectProps> = ({
       </Text>
 
       <Menu>
-        <MenuButton mr="4" size="xs" as={Button}>
+        <MenuButton mr="4" size="xs" as={Button} fontWeight="medium">
           {value}
         </MenuButton>
 

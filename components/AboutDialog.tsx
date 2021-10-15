@@ -40,8 +40,7 @@ const AboutDialog: FC = () => {
       <IconButton
         size="sm"
         aria-label="About"
-        colorScheme="gray"
-        color={darkMode ? "white" : "black"}
+        colorScheme="red"
         rounded="full"
         icon={<AtSign size={16} />}
         onClick={() => setOpen(true)}
