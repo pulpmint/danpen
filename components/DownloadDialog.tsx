@@ -1,16 +1,22 @@
 import { Button, IconButton } from "@chakra-ui/button";
 import { Box, Divider, Text } from "@chakra-ui/layout";
-import { Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay } from "@chakra-ui/modal";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay
+} from "@chakra-ui/modal";
 import { Tooltip } from "@chakra-ui/tooltip";
 import { FC, useState } from "react";
-import { Image, X } from "react-feather";
+import { LogOut, X } from "react-feather";
 import { EXPORTSIZE } from "../constants/panelSettings";
 import usePanelSettings from "../hooks/usePanelSettings";
 import domToImage from "../public/js/domToImage";
 import { ExportSize } from "../types/PanelSettings";
 
 const DownloadDialog: FC = () => {
-  const { exportSize, setExportSize } = usePanelSettings();
+  const { darkMode, exportSize, setExportSize } = usePanelSettings();
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -40,7 +46,10 @@ const DownloadDialog: FC = () => {
         height: document.getElementById("danpen").offsetHeight * scale
       };
 
-      const base64 = await domToImage.toPng(document.getElementById("danpen"), config);
+      const base64 = await domToImage.toPng(
+        document.getElementById("danpen"),
+        config
+      );
 
       link.href = base64;
       link.download = `Danpen ${scale - 1}x.png`;
@@ -57,12 +66,13 @@ const DownloadDialog: FC = () => {
 
   return (
     <>
-      <Tooltip label="Download Image">
+      <Tooltip label="Export Image">
         <IconButton
-          colorScheme="green"
+          colorScheme="gray"
           borderRadius="full"
-          aria-label="Download Image"
-          icon={<Image size={20} />}
+          aria-label="Export Image"
+          transform="rotate(-90deg)"
+          icon={<LogOut size={16} />}
           onClick={() => setOpen(true)}
         />
       </Tooltip>
@@ -72,8 +82,12 @@ const DownloadDialog: FC = () => {
 
         <ModalContent>
           <ModalHeader>
-            <Box display="flex" alignItems="center" justifyContent="space-between">
-              <Text fontWeight="bold">Size Matters</Text>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <Text fontWeight="bold">Select Size</Text>
               <IconButton
                 size="sm"
                 borderRadius="full"
@@ -88,23 +102,55 @@ const DownloadDialog: FC = () => {
 
           <ModalBody>
             <Text mt="2" mb="4">
-              We all say size doesn't matter but it's not true and we all know it. Select a size to
-              download.
+              Select the size of the download. It might take a few seconds to
+              render the image. Please be patient.
             </Text>
 
-            <Box display="flex" alignItems="center" mb="4">
-              {EXPORTSIZE.map(size => (
-                <Button
-                  key={size.value}
-                  size="xs"
-                  mr="2"
-                  colorScheme={exportSize === size.value ? "green" : "gray"}
-                  onClick={() => exportImage(size.value)}
-                >
-                  {size.label}
-                </Button>
-              ))}
+            <Box
+              display="flex"
+              alignItems="center"
+              mb="4"
+              justifyContent="space-between"
+            >
+              <Box
+                display="flex"
+                alignItems="center"
+                rounded="full"
+                overflow="hidden"
+              >
+                {EXPORTSIZE.map(size => (
+                  <Button
+                    key={size.value}
+                    size="sm"
+                    px="4"
+                    rounded="none"
+                    colorScheme={exportSize === size.value ? "green" : "gray"}
+                    onClick={() => setExportSize(size.value)}
+                  >
+                    {size.label}
+                  </Button>
+                ))}
+              </Box>
+
+              <Button
+                key="download"
+                size="sm"
+                mr="2"
+                px="4"
+                rounded="full"
+                colorScheme="green"
+                onClick={() => exportImage(exportSize)}
+              >
+                Save Image
+              </Button>
             </Box>
+
+            <Divider />
+
+            <Text my="4" fontSize="sm" textColor="gray.500">
+              <b>Note:</b> Avoid large size background images as it might take
+              long time to load or can make the site unresponsive.
+            </Text>
           </ModalBody>
         </ModalContent>
       </Modal>
