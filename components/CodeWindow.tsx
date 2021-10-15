@@ -2,18 +2,16 @@ import { Box } from "@chakra-ui/layout";
 import { ScaleFade } from "@chakra-ui/transition";
 import { FC, useEffect, useState } from "react";
 import usePanelSettings from "../hooks/usePanelSettings";
-import useWindowSize from "../hooks/useWindowSize";
 import CodeEditor from "./CodeEditor";
 import WindowControls from "./WindowControls";
 
 const CodeWindow: FC = () => {
   const { darkMode, background, color, padding } = usePanelSettings();
-  const { height } = useWindowSize();
 
   const [mounted, setMounted] = useState<boolean>(false);
 
   const getBackgroundColor = (): string => {
-    return darkMode ? "gray.800" : "gray.200";
+    return darkMode ? "gray.900" : "gray.100";
   };
 
   useEffect(() => {
@@ -26,17 +24,18 @@ const CodeWindow: FC = () => {
         <Box
           zIndex="-1"
           position="absolute"
-          height="full"
-          minHeight={height}
           top="0"
           left="0"
           right="0"
-          bgGradient={color.value}
+          bottom="0"
+          bg={color.value}
+          bgSize="cover"
+          bgPos="center"
         ></Box>
       )}
 
       <ScaleFade in={mounted}>
-        <Box width="full" p={padding} backgroundColor="blackAlpha.50">
+        <Box width="full" p={padding} backgroundColor="blackAlpha.100">
           <Box
             width="full"
             minHeight="max-content"
