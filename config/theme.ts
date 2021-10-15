@@ -19,5 +19,12 @@ export const theme: Theme = extendTheme({
       800: "#262626",
       900: "#171717"
     }
+  },
+  components: {
+    Button: {
+      baseStyle: {
+        fontWeight: "normal"
+      }
+    }
   }
 });
