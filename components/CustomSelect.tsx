@@ -10,7 +10,12 @@ interface CustomSelectProps {
   changeValue: Function;
 }
 
-const CustomSelect: FC<CustomSelectProps> = ({ label, value, list, changeValue }) => {
+const CustomSelect: FC<CustomSelectProps> = ({
+  label,
+  value,
+  list,
+  changeValue
+}) => {
   return (
     <Box mr="4">
       <Text mb="1" fontSize="sm" fontWeight="medium" textColor="gray">
@@ -18,13 +23,17 @@ const CustomSelect: FC<CustomSelectProps> = ({ label, value, list, changeValue }
       </Text>
 
       <Menu>
-        <MenuButton mr="4" size="xs" as={Button}>
+        <MenuButton mr="4" size="xs" as={Button} fontWeight="medium">
           {value}
         </MenuButton>
 
-        <MenuList>
+        <MenuList p="2">
           {list.map((item, index) => (
-            <MenuItem key={index} onClick={() => changeValue(item)}>
+            <MenuItem
+              key={index}
+              rounded="md"
+              onClick={() => changeValue(item)}
+            >
               {item}
             </MenuItem>
           ))}

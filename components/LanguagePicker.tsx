@@ -6,10 +6,12 @@ import { LANGUAGES } from "../constants/languages";
 import usePanelSettings from "../hooks/usePanelSettings";
 
 const LanguagePicker: FC = () => {
-  const { language, predictions, setLanguage, setPredictions } = usePanelSettings();
+  const { language, predictions, setLanguage, setPredictions } =
+    usePanelSettings();
 
   const getLabel = (): string => {
-    if (language.mode === "auto") return predictions ? "Auto - " + predictions.name : "Auto";
+    if (language.mode === "auto")
+      return predictions ? "Auto - " + predictions.name : "Auto";
     return language.name;
   };
 
@@ -24,16 +26,19 @@ const LanguagePicker: FC = () => {
           {getLabel()}
         </MenuButton>
 
-        <MenuList maxHeight="64" overflowY="auto">
+        <MenuList p="2" maxHeight="64" overflowY="auto">
           {LANGUAGES.map((item, index) => (
             <MenuItem
               key={index}
+              rounded="md"
               onClick={() => {
                 setPredictions(null);
                 setLanguage(item);
               }}
             >
-              {language.mode === "auto" && item.mode === "auto" ? getLabel() : item.name}
+              {language.mode === "auto" && item.mode === "auto"
+                ? getLabel()
+                : item.name}
             </MenuItem>
           ))}
         </MenuList>

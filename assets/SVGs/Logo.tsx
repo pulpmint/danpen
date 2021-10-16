@@ -1,10 +1,7 @@
 import { FC } from "react";
+import { ISVGProps } from "../../types/misc";
 
-interface LogoProps {
-  size?: number;
-}
-
-const Logo: FC<LogoProps> = ({ size = 32 }) => {
+const Logo: FC<ISVGProps> = ({ size = 32 }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

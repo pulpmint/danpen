@@ -1,3 +1,4 @@
+import { Input } from "@chakra-ui/input";
 import { Box } from "@chakra-ui/layout";
 import { FC } from "react";
 
@@ -5,8 +6,14 @@ const colors: string[] = ["red.500", "yellow.500", "green.500"];
 
 const WindowControls: FC = () => {
   return (
-    <Box display="flex" alignItems="center" justifyContent="space-between" mb="4">
-      <Box display="flex">
+    <Box
+      pos="relative"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      mb="4"
+    >
+      <Box pos="absolute" left="0" display="flex">
         {colors.map(color => (
           <Box
             key={color}
@@ -18,6 +25,13 @@ const WindowControls: FC = () => {
           ></Box>
         ))}
       </Box>
+      <Input
+        variant="unstyled"
+        size="sm"
+        w="max-content"
+        textAlign="center"
+        defaultValue="readme.md"
+      />
     </Box>
   );
 };
