@@ -1,4 +1,5 @@
 import { IconButton } from "@chakra-ui/button";
+import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box, Heading, Link } from "@chakra-ui/layout";
 import { Modal, ModalBody, ModalContent, ModalOverlay } from "@chakra-ui/modal";
 import { Tooltip } from "@chakra-ui/tooltip";
@@ -33,18 +34,22 @@ const social: SocialTags[] = [
 const AboutDialog: FC = () => {
   const { darkMode } = usePanelSettings();
 
+  const buttonBg = useColorModeValue("gray.300", "gray.700");
+
   const [open, setOpen] = useState<boolean>(false);
 
   return (
     <>
-      <IconButton
-        size="sm"
-        aria-label="About"
-        colorScheme="red"
-        rounded="full"
-        icon={<AtSign size={16} />}
-        onClick={() => setOpen(true)}
-      />
+      <Box bg={buttonBg} rounded="full" onClick={() => setOpen(true)}>
+        <IconButton
+          size="sm"
+          aria-label="About"
+          variant="ghost"
+          rounded="full"
+          icon={<AtSign size={16} />}
+          onClick={() => setOpen(true)}
+        />
+      </Box>
 
       <Modal
         isCentered
