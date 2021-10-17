@@ -10,6 +10,7 @@ import useWindowSize from "../hooks/useWindowSize";
 import CodeMirrorTheme from "../styles/CodeMirrorTheme";
 import FontFaces from "../styles/FontFaces";
 import MarkDownTheme from "../styles/MarkDownTheme";
+import Misc from "../styles/Misc";
 
 function App({ Component, pageProps }: AppProps) {
   const { width } = useWindowSize();
@@ -35,6 +36,7 @@ function App({ Component, pageProps }: AppProps) {
                     <FontFaces />
                     <MarkDownTheme />
                     <CodeMirrorTheme />
+                    <Misc />
                     <Component {...pageProps} />
                   </>
                 ) : (
