@@ -1,15 +1,16 @@
 import { IconButton } from "@chakra-ui/button";
+import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Tooltip } from "@chakra-ui/tooltip";
 import { FC } from "react";
-import usePanelSettings from "../hooks/usePanelSettings";
 import { IToggleButton } from "../types/ToggleButton";
 
-const ToggleButton: FC<IToggleButton> = ({ label, icon, toggleValue, toggle }) => {
-  const { darkMode } = usePanelSettings();
-
-  const getBackgroundColor = (): string => {
-    return darkMode ? "gray.700" : "gray.300";
-  };
+const ToggleButton: FC<IToggleButton> = ({
+  label,
+  icon,
+  toggleValue,
+  toggle
+}) => {
+  const buttonBg = useColorModeValue("gray.300", "gray.700");
 
   return (
     <Tooltip label={label}>
@@ -18,7 +19,7 @@ const ToggleButton: FC<IToggleButton> = ({ label, icon, toggleValue, toggle }) =
         borderRadius="full"
         icon={icon}
         aria-label={label}
-        backgroundColor={toggleValue ? getBackgroundColor() : "transparent"}
+        backgroundColor={toggleValue ? buttonBg : "transparent"}
         onClick={() => toggle()}
       />
     </Tooltip>

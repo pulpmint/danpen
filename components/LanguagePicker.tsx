@@ -17,7 +17,7 @@ const LanguagePicker: FC = () => {
 
   return (
     <Box mr="4">
-      <Text mb="1" fontSize="sm" fontWeight="medium" textColor="gray">
+      <Text mb="1" fontSize="xs" fontWeight="medium" textColor="gray">
         Language
       </Text>
 

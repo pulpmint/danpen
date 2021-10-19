@@ -1,3 +1,4 @@
+import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box, Container } from "@chakra-ui/layout";
 import { ScaleFade } from "@chakra-ui/transition";
 import { FC, useEffect, useState } from "react";
@@ -26,6 +27,8 @@ const Panel: FC = () => {
     setPadding,
     setFont
   } = usePanelSettings();
+
+  const bg = useColorModeValue("gray.100", "gray.900");
 
   const [mounted, setMounted] = useState<boolean>(false);
 
@@ -56,10 +59,6 @@ const Panel: FC = () => {
     }
   ];
 
-  const getBackgroundColor = (): string => {
-    return darkMode ? "gray.900" : "gray.100";
-  };
-
   useEffect(() => {
     setTimeout(() => setMounted(true), 500);
     document.querySelector("body").style.overflowY = "auto";
@@ -73,7 +72,7 @@ const Panel: FC = () => {
           p="4"
           borderRadius="lg"
           boxShadow="md"
-          backgroundColor={getBackgroundColor()}
+          backgroundColor={bg}
           display="flex"
           alignItems="center"
           justifyContent="space-between"

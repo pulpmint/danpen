@@ -1,3 +1,4 @@
+import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box } from "@chakra-ui/layout";
 import { ScaleFade } from "@chakra-ui/transition";
 import { FC, useEffect, useState } from "react";
@@ -6,13 +7,11 @@ import CodeEditor from "./CodeEditor";
 import WindowControls from "./WindowControls";
 
 const CodeWindow: FC = () => {
-  const { darkMode, background, color, padding } = usePanelSettings();
+  const { background, color, padding } = usePanelSettings();
+
+  const bg = useColorModeValue("gray.100", "gray.900");
 
   const [mounted, setMounted] = useState<boolean>(false);
-
-  const getBackgroundColor = (): string => {
-    return darkMode ? "gray.900" : "gray.100";
-  };
 
   useEffect(() => {
     setTimeout(() => setMounted(true), 250);
@@ -42,7 +41,7 @@ const CodeWindow: FC = () => {
             p="4"
             borderRadius="md"
             boxShadow="xl"
-            backgroundColor={getBackgroundColor()}
+            backgroundColor={bg}
           >
             <WindowControls />
 

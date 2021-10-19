@@ -4,7 +4,7 @@ import { Box, Divider, Text } from "@chakra-ui/layout";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
 import { Tooltip } from "@chakra-ui/tooltip";
 import { ChangeEvent, FC } from "react";
-import { ChevronDown, PlusCircle } from "react-feather";
+import { ChevronDown, Image, MinusCircle, PlusCircle } from "react-feather";
 import { GRADIENTS } from "../constants/gradients";
 import usePanelSettings from "../hooks/usePanelSettings";
 import ColorDetail from "./ColorDetail";
@@ -72,7 +72,7 @@ const ColorPicker: FC = () => {
           onClick={() => uploadFile()}
         >
           <Box display="flex" flexDir="row" alignItems="center">
-            <PlusCircle size={16} />
+            <Image size={16} />
             <Text ml="2">Image Background</Text>
           </Box>
         </MenuItem>
