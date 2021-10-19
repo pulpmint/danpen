@@ -7,7 +7,6 @@ import { FC, ReactNode, useState } from "react";
 import { AtSign, GitHub, Twitter, X } from "react-feather";
 import ReactMarkdown from "react-markdown";
 import { aboutMarkdown } from "../constants/about";
-import usePanelSettings from "../hooks/usePanelSettings";
 
 export interface SocialTags {
   link: string;
@@ -32,9 +31,9 @@ const social: SocialTags[] = [
 ];
 
 const AboutDialog: FC = () => {
-  const { darkMode } = usePanelSettings();
-
-  const buttonBg = useColorModeValue("gray.300", "gray.700");
+  const buttonBg = useColorModeValue("transparent", "gray.900");
+  const modalBg = useColorModeValue("gray.100", "gray.900");
+  const headerBg = useColorModeValue("gray.200", "gray.800");
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -44,10 +43,8 @@ const AboutDialog: FC = () => {
         <IconButton
           size="sm"
           aria-label="About"
-          variant="ghost"
           rounded="full"
           icon={<AtSign size={16} />}
-          onClick={() => setOpen(true)}
         />
       </Box>
 
@@ -60,19 +57,16 @@ const AboutDialog: FC = () => {
       >
         <ModalOverlay />
 
-        <ModalContent
-          overflow="hidden"
-          bgColor={darkMode ? "gray.900" : "gray.50"}
-        >
+        <ModalContent overflow="hidden" bg={modalBg}>
           <ModalBody>
             <Box
               position="absolute"
               top="0"
               left="0"
               right="0"
-              backgroundColor={darkMode ? "gray.700" : "gray.100"}
               minHeight="48"
               display="flex"
+              bg={headerBg}
               alignItems="flex-end"
               justifyContent="space-between"
             >
@@ -84,10 +78,14 @@ const AboutDialog: FC = () => {
                 position="absolute"
                 top="6"
                 right="6"
+                display="flex"
+                flexDir="column"
+                alignItems="center"
+                justifyContent="center"
                 size="sm"
-                colorScheme="gray"
-                borderRadius="full"
-                aria-label="close"
+                variant="unstyled"
+                rounded="full"
+                aria-label="Close"
                 icon={<X size={16} />}
                 onClick={() => setOpen(false)}
               />
