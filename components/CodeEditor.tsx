@@ -19,7 +19,9 @@ const CodeEditor: FC = () => {
     hljsPred = hljs.highlightAuto(code, hljsLanguages);
 
     if (hljsPred.language) {
-      lang = _.find(LANGUAGES, lang => lang.highlight.includes(hljsPred.language));
+      lang = _.find(LANGUAGES, lang =>
+        lang.highlight.includes(hljsPred.language)
+      );
     }
 
     if (language.mode === "auto") {
@@ -92,14 +94,7 @@ const CodeEditor: FC = () => {
     window.editor.setOption("lineNumbers", lineNumber);
   }, [lineNumber]);
 
-  return (
-    <textarea
-      placeholder={DEF_CODE}
-      ref={editorRef}
-      value={code}
-      onChange={() => console.warn("Something has changed!")}
-    />
-  );
+  return <textarea placeholder={DEF_CODE} ref={editorRef} value={code} />;
 };
 
 export default CodeEditor;
