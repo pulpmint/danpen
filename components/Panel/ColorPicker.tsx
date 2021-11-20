@@ -1,3 +1,4 @@
+import { IconButton } from "@chakra-ui/button";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Input } from "@chakra-ui/input";
 import { Box, Divider, Text } from "@chakra-ui/layout";
@@ -9,13 +10,13 @@ import MinusIcon from "../../assets/SVGs/MinusIcon";
 import {
   BACKGROUND_COLOR,
   ICON_BACKGROUND,
+  ICON_BACKGROUND_HOVER,
   TEXT,
   TEXT_HIGHLIGHT
 } from "../../config/colors";
 import { GRADIENTS } from "../../constants/gradients";
 import usePanelSettings from "../../hooks/usePanelSettings";
 import ColorDetail from "./ColorDetail";
-import PanelIconButton from "./PanelIconButton";
 
 const ColorPicker: FC = () => {
   const { background, color, setBackground, setColor } = usePanelSettings();
@@ -28,6 +29,10 @@ const ColorPicker: FC = () => {
   const iconBackground = useColorModeValue(
     ICON_BACKGROUND.light,
     ICON_BACKGROUND.dark
+  );
+  const iconBackgroundHover = useColorModeValue(
+    ICON_BACKGROUND_HOVER.light,
+    ICON_BACKGROUND_HOVER.dark
   );
   const textColor = useColorModeValue(TEXT.light, TEXT.dark);
   const textHighlightColor = useColorModeValue(
@@ -55,42 +60,43 @@ const ColorPicker: FC = () => {
   return (
     <Menu>
       <Tooltip
-        isDisabled={false}
         bg={iconBackground}
         textColor={textColor}
         fontWeight="normal"
         label="Select Background"
       >
         <Box mr="6">
-          <MenuButton>
-            <PanelIconButton
-              buttonProps={{
-                "aria-label": "Select Theme",
-                rounded: "xl"
-              }}
-            >
-              {background ? (
-                <Box
-                  bgSize="cover !important"
-                  bgPos="center !important"
-                  height="6"
-                  width="6"
-                  m="3"
-                  bg={color.value}
-                  rounded="full"
-                ></Box>
-              ) : (
-                <Box
-                  height="6"
-                  width="6"
-                  m="3"
-                  rounded="full"
-                  textColor={textHighlightColor}
-                >
-                  <MinusIcon />
-                </Box>
-              )}
-            </PanelIconButton>
+          <MenuButton
+            as={IconButton}
+            variant="unstyled"
+            size="lg"
+            w="12"
+            h="12"
+            rounded="xl"
+            bg={iconBackground}
+            _hover={{ backgroundColor: iconBackgroundHover }}
+          >
+            {background ? (
+              <Box
+                bgSize="cover !important"
+                bgPos="center !important"
+                height="6"
+                width="6"
+                m="3"
+                bg={color.value}
+                rounded="full"
+              ></Box>
+            ) : (
+              <Box
+                height="6"
+                width="6"
+                m="3"
+                rounded="full"
+                textColor={textHighlightColor}
+              >
+                <MinusIcon />
+              </Box>
+            )}
           </MenuButton>
         </Box>
       </Tooltip>
