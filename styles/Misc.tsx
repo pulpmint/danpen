@@ -3,9 +3,14 @@ import { theme } from "../config/theme";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 
 import "focus-visible/dist/focus-visible";
+import { BACKGROUND_COLOR } from "../config/colors";
 
 const Misc: FC = () => {
   // colors
+  const backgroundColor = useColorModeValue(
+    BACKGROUND_COLOR.light,
+    BACKGROUND_COLOR.dark
+  );
   const scrollbarColor = useColorModeValue(
     theme.colors.gray[200],
     theme.colors.gray[700]
@@ -13,6 +18,10 @@ const Misc: FC = () => {
 
   return (
     <style jsx global>{`
+      body {
+        background-color: ${backgroundColor};
+      }
+
       .js-focus-visible :focus:not([data-focus-visible-added]) {
         outline: none;
         box-shadow: none;
