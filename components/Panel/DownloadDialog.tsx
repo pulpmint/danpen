@@ -7,7 +7,6 @@ import {
   ModalHeader,
   ModalOverlay
 } from "@chakra-ui/modal";
-import { Tooltip } from "@chakra-ui/tooltip";
 import { FC, useState } from "react";
 import { X } from "react-feather";
 import DownloadIcon from "../../assets/SVGs/DownloadIcon";
@@ -75,21 +74,20 @@ const DownloadDialog: FC = () => {
 
   return (
     <>
-      <Tooltip label="Export Image">
-        <PanelIconButton
-          buttonProps={{
-            "aria-label": "Download",
-            ml: "6",
-            rounded: "2xl",
-            textColor: "green.500",
-            onClick: () => setOpen(true)
-          }}
-        >
-          <Box m="3">
-            <DownloadIcon size={24} />
-          </Box>
-        </PanelIconButton>
-      </Tooltip>
+      <PanelIconButton
+        buttonProps={{
+          "aria-label": "Download",
+          ml: "6",
+          rounded: "2xl",
+          textColor: "green.500",
+          onClick: () => setOpen(true)
+        }}
+        label="Download Image"
+      >
+        <Box m="3">
+          <DownloadIcon size={24} />
+        </Box>
+      </PanelIconButton>
 
       <Modal isCentered onClose={() => setOpen(false)} isOpen={open}>
         <ModalOverlay />
