@@ -94,7 +94,14 @@ const CodeEditor: FC = () => {
     window.editor.setOption("lineNumbers", lineNumber);
   }, [lineNumber]);
 
-  return <textarea placeholder={DEF_CODE} ref={editorRef} value={code} />;
+  return (
+    <textarea
+      placeholder={DEF_CODE}
+      ref={editorRef}
+      value={code}
+      onChange={() => console.log()}
+    />
+  );
 };
 
 export default CodeEditor;
