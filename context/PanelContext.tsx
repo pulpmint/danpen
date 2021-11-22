@@ -33,7 +33,7 @@ const initialContext: IPanelContext = {
   lineNumber: false,
   background: false,
   maxWidth: false,
-  padding: PADDING[1],
+  padding: PADDING[0],
   color: GRADIENTS[0],
   font: FONTSTYLE[0],
   language: LANGUAGES[0],
