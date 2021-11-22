@@ -1,16 +1,12 @@
-import { IconButton } from "@chakra-ui/button";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box, Heading, Link } from "@chakra-ui/layout";
 import { Modal, ModalBody, ModalContent, ModalOverlay } from "@chakra-ui/modal";
 import { FC, ReactNode, useState } from "react";
 import { AtSign, Twitter, X } from "react-feather";
 import ReactMarkdown from "react-markdown";
-import {
-  BACKGROUND_COLOR,
-  ICON_BACKGROUND,
-  ICON_BACKGROUND_HOVER
-} from "../config/colors";
+import { BACKGROUND_COLOR, ICON_BACKGROUND } from "../config/colors";
 import { aboutMarkdown } from "../constants/about";
+import CustomButton from "./CustomButton";
 
 export interface SocialTags {
   link: string;
@@ -22,7 +18,7 @@ const social: SocialTags[] = [
   {
     link: "https://twitter.com/pulpmint",
     service: "Twitter",
-    icon: <Twitter size={20} />
+    icon: <Twitter size={16} />
   }
 ];
 
@@ -38,25 +34,21 @@ const AboutDialog: FC = () => {
     ICON_BACKGROUND.light,
     ICON_BACKGROUND.dark
   );
-  const iconBackgroundHover = useColorModeValue(
-    ICON_BACKGROUND_HOVER.light,
-    ICON_BACKGROUND_HOVER.dark
-  );
 
   const [open, setOpen] = useState<boolean>(false);
 
   return (
     <>
       <Box bg={buttonBg} rounded="full" onClick={() => setOpen(true)}>
-        <IconButton
-          size="sm"
-          aria-label="About"
-          variant="solid"
-          rounded="full"
-          bg={iconBackground}
-          _hover={{ backgroundColor: iconBackgroundHover }}
-          icon={<AtSign size={16} />}
-        />
+        <CustomButton
+          buttonProps={{
+            p: "0",
+            onClick: () => setOpen(true)
+          }}
+          label="About"
+        >
+          <AtSign size={16} />
+        </CustomButton>
       </Box>
 
       <Modal
@@ -68,63 +60,65 @@ const AboutDialog: FC = () => {
       >
         <ModalOverlay />
 
-        <ModalContent rounded="2xl" overflow="hidden" bg={backgroundColor}>
-          <ModalBody>
+        <ModalContent
+          rounded="2xl"
+          overflow="hidden"
+          bg={backgroundColor}
+          borderColor={iconBackground}
+          borderWidth="thin"
+          borderStyle="solid"
+          shadow="none"
+        >
+          <ModalBody p="6">
             <Box
-              position="absolute"
-              top="0"
-              left="0"
-              right="0"
-              minHeight="48"
+              pos="relative"
+              minH="48"
               display="flex"
-              alignItems="flex-end"
-              justifyContent="space-between"
+              flexDir="column"
+              justifyContent="flex-end"
             >
-              <Heading pl="6" pb="6" fontWeight="extrabold">
-                About the Project
-              </Heading>
+              <Heading fontWeight="extrabold">About the Project</Heading>
 
-              <IconButton
-                position="absolute"
-                top="6"
-                right="6"
-                display="flex"
-                flexDir="column"
-                alignItems="center"
-                justifyContent="center"
-                size="sm"
-                variant="unstyled"
-                rounded="full"
-                aria-label="Close"
-                bg={iconBackground}
-                _hover={{ backgroundColor: iconBackgroundHover }}
-                icon={<X size={16} />}
-                onClick={() => setOpen(false)}
-              />
+              <CustomButton
+                buttonProps={{
+                  p: "0",
+                  pos: "absolute",
+                  top: "0",
+                  right: "0",
+                  onClick: () => setOpen(false)
+                }}
+              >
+                <X size={16} />
+              </CustomButton>
             </Box>
 
-            <Box mt="48" mb="4" pt="6">
+            <Box pos="relative" pt="6">
               <ReactMarkdown
                 children={aboutMarkdown}
                 linkTarget="_blank"
                 className="markdown-theme"
               />
-            </Box>
 
-            <Box
-              position="absolute"
-              bottom="8"
-              right="8"
-              display="flex"
-              flexDir="row"
-              alignItems="center"
-              gridGap="3"
-            >
-              {social.map(site => (
-                <Link isExternal href={site.link} color="blue.400">
-                  {site.icon}
-                </Link>
-              ))}
+              <Box
+                position="absolute"
+                bottom="0.5"
+                right="0.5"
+                display="flex"
+                flexDir="row"
+                alignItems="center"
+                gridGap="3"
+              >
+                {social.map(site => (
+                  <Link
+                    key={site.link}
+                    isExternal
+                    href={site.link}
+                    color="blue.400"
+                  >
+                    {site.icon}
+                  </Link>
+                ))}
+              </Box>
             </Box>
           </ModalBody>
         </ModalContent>
