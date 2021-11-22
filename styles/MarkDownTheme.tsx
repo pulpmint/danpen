@@ -23,6 +23,10 @@ const MarkDownTheme: FC = () => {
       .markdown-theme p a:hover {
         color: ${theme.colors.blue[400]};
       }
+
+      .markdown-theme p:last-child {
+        margin-bottom: 0;
+      }
     `}</style>
   );
 };

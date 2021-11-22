@@ -3,7 +3,7 @@ export interface Gradient {
   value: string;
 }
 
-export type PaddingSetting = 8 | 16 | 32;
+export type PaddingSetting = 16 | 24 | 32;
 
 export type FontSetting =
   | "Fira Code"

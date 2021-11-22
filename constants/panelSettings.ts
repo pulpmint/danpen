@@ -4,7 +4,7 @@ import {
   PaddingSetting
 } from "../types/PanelSettings";
 
-export const PADDING: PaddingSetting[] = [8, 16, 32];
+export const PADDING: PaddingSetting[] = [16, 24, 32];
 
 export const FONTSTYLE: FontSetting[] = [
   "Fira Code",

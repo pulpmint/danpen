@@ -2,6 +2,7 @@ import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box } from "@chakra-ui/layout";
 import { ScaleFade } from "@chakra-ui/transition";
 import { FC, useEffect, useState } from "react";
+import { BACKGROUND_COLOR } from "../config/colors";
 import usePanelSettings from "../hooks/usePanelSettings";
 import CodeEditor from "./CodeEditor";
 import WindowControls from "./WindowControls";
@@ -9,7 +10,8 @@ import WindowControls from "./WindowControls";
 const CodeWindow: FC = () => {
   const { background, color, padding } = usePanelSettings();
 
-  const bg = useColorModeValue("gray.100", "gray.900");
+  const bg = useColorModeValue(BACKGROUND_COLOR.light, BACKGROUND_COLOR.dark);
+  const hg = useColorModeValue("blackAlpha.50", "whiteAlpha.50");
 
   const [mounted, setMounted] = useState<boolean>(false);
 
@@ -34,13 +36,18 @@ const CodeWindow: FC = () => {
       )}
 
       <ScaleFade in={mounted}>
-        <Box width="full" p={padding} backgroundColor="blackAlpha.100">
+        <Box
+          id="pic-area"
+          width="full"
+          p={padding}
+          backgroundColor={background ? "blackAlpha.100" : hg}
+        >
           <Box
             width="full"
             minHeight="max-content"
             p="4"
             borderRadius="md"
-            boxShadow="xl"
+            boxShadow="2xl"
             backgroundColor={bg}
           >
             <WindowControls />
