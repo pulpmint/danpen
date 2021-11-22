@@ -6,7 +6,7 @@ import { ICON_BACKGROUND, TEXT_HIGHLIGHT } from "../../config/colors";
 import { PADDING } from "../../constants/panelSettings";
 import usePanelSettings from "../../hooks/usePanelSettings";
 
-const paddingMapping = { 8: "S", 16: "M", 32: "L" };
+const paddingMapping = { 16: "S", 24: "M", 32: "L" };
 
 const PaddingPicker: FC = () => {
   const { padding, setPadding } = usePanelSettings();
