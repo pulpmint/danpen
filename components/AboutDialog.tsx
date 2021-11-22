@@ -2,7 +2,6 @@ import { IconButton } from "@chakra-ui/button";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box, Heading, Link } from "@chakra-ui/layout";
 import { Modal, ModalBody, ModalContent, ModalOverlay } from "@chakra-ui/modal";
-import { Tooltip } from "@chakra-ui/tooltip";
 import { FC, ReactNode, useState } from "react";
 import { AtSign, Twitter, X } from "react-feather";
 import ReactMarkdown from "react-markdown";
@@ -15,7 +14,6 @@ import { aboutMarkdown } from "../constants/about";
 
 export interface SocialTags {
   link: string;
-  label: string;
   service: string;
   icon: ReactNode;
 }
@@ -23,7 +21,6 @@ export interface SocialTags {
 const social: SocialTags[] = [
   {
     link: "https://twitter.com/pulpmint",
-    label: "Say 👋 on Twitter",
     service: "Twitter",
     icon: <Twitter size={20} />
   }
@@ -124,11 +121,9 @@ const AboutDialog: FC = () => {
               gridGap="3"
             >
               {social.map(site => (
-                <Tooltip key={site.service} label={site.label}>
-                  <Link isExternal href={site.link} color="blue.400">
-                    {site.icon}
-                  </Link>
-                </Tooltip>
+                <Link isExternal href={site.link} color="blue.400">
+                  {site.icon}
+                </Link>
               ))}
             </Box>
           </ModalBody>
