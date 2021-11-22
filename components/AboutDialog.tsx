@@ -4,7 +4,7 @@ import { Modal, ModalBody, ModalContent, ModalOverlay } from "@chakra-ui/modal";
 import { FC, ReactNode, useState } from "react";
 import { AtSign, Twitter, X } from "react-feather";
 import ReactMarkdown from "react-markdown";
-import { BACKGROUND_COLOR, ICON_BACKGROUND } from "../config/colors";
+import { BACKGROUND_COLOR } from "../config/colors";
 import { aboutMarkdown } from "../constants/about";
 import CustomButton from "./CustomButton";
 
@@ -29,10 +29,6 @@ const AboutDialog: FC = () => {
   const backgroundColor = useColorModeValue(
     BACKGROUND_COLOR.light,
     BACKGROUND_COLOR.dark
-  );
-  const iconBackground = useColorModeValue(
-    ICON_BACKGROUND.light,
-    ICON_BACKGROUND.dark
   );
 
   const [open, setOpen] = useState<boolean>(false);
@@ -64,9 +60,6 @@ const AboutDialog: FC = () => {
           rounded="2xl"
           overflow="hidden"
           bg={backgroundColor}
-          borderColor={iconBackground}
-          borderWidth="thin"
-          borderStyle="solid"
           shadow="none"
         >
           <ModalBody p="6">
