@@ -31,5 +31,9 @@ export const theme: Theme = extendTheme({
         borderRadius: "full"
       }
     }
+  },
+  config: {
+    initialColorMode: "dark",
+    useSystemColorMode: false
   }
 });
