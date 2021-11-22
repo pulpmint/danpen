@@ -17,6 +17,7 @@ const CustomTooltip: FC<TooltipProps> = ({ children, ...props }) => {
       bg={iconBackground}
       textColor={textColor}
       fontWeight="normal"
+      fontSize="xs"
       {...props}
     >
       {children}
