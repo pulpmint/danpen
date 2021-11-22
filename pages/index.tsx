@@ -2,7 +2,7 @@ import { Container } from "@chakra-ui/layout";
 import { FC } from "react";
 import NavBar from "../components/NavBar";
 import CodeWindow from "../components/CodeWindow";
-import Panel from "../components/Panel";
+import Panel from "../components/Panel/Panel";
 import usePanelSettings from "../hooks/usePanelSettings";
 
 const Home: FC = () => {

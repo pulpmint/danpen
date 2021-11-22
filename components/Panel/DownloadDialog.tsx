@@ -7,22 +7,28 @@ import {
   ModalHeader,
   ModalOverlay
 } from "@chakra-ui/modal";
-import { Tooltip } from "@chakra-ui/tooltip";
 import { FC, useState } from "react";
-import { LogOut, X } from "react-feather";
-import { EXPORTSIZE } from "../constants/panelSettings";
-import usePanelSettings from "../hooks/usePanelSettings";
-import domToImage from "../public/js/domToImage";
-import { ExportSize } from "../types/PanelSettings";
+import { X } from "react-feather";
+import DownloadIcon from "../../assets/SVGs/DownloadIcon";
+import { theme } from "../../config/theme";
+import { EXPORTSIZE } from "../../constants/panelSettings";
+import usePanelSettings from "../../hooks/usePanelSettings";
+import domToImage from "../../public/js/domToImage";
+import { ExportSize } from "../../types/PanelSettings";
+import PanelIconButton from "./PanelIconButton";
 
 const DownloadDialog: FC = () => {
-  const { darkMode, exportSize, setExportSize } = usePanelSettings();
+  const { exportSize, setExportSize } = usePanelSettings();
 
   const [open, setOpen] = useState<boolean>(false);
 
   const exportImage = async (scale: ExportSize) => {
     if (document && window) {
       const link = document.createElement("a");
+
+      const picArea = document.getElementById("pic-area");
+
+      picArea.style.backgroundColor = "transparent";
 
       const config = {
         style: {
@@ -51,6 +57,8 @@ const DownloadDialog: FC = () => {
         config
       );
 
+      picArea.style.backgroundColor = theme.colors.blackAlpha[100];
+
       link.href = base64;
       link.download = `Danpen ${scale - 1}x.png`;
 
@@ -66,16 +74,20 @@ const DownloadDialog: FC = () => {
 
   return (
     <>
-      <Tooltip label="Export Image">
-        <IconButton
-          colorScheme="gray"
-          borderRadius="full"
-          aria-label="Export Image"
-          transform="rotate(-90deg)"
-          icon={<LogOut size={16} />}
-          onClick={() => setOpen(true)}
-        />
-      </Tooltip>
+      <PanelIconButton
+        buttonProps={{
+          "aria-label": "Download",
+          ml: "6",
+          rounded: "2xl",
+          textColor: "green.500",
+          onClick: () => setOpen(true)
+        }}
+        label="Download Image"
+      >
+        <Box m="3">
+          <DownloadIcon size={24} />
+        </Box>
+      </PanelIconButton>
 
       <Modal isCentered onClose={() => setOpen(false)} isOpen={open}>
         <ModalOverlay />
