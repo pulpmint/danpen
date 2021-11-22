@@ -1,6 +1,5 @@
 import { Box, Container } from "@chakra-ui/layout";
 import { FC } from "react";
-import Logo from "../assets/SVGs/Logo";
 import AboutDialog from "./AboutDialog";
 
 const NavBar: FC = () => {
@@ -13,10 +12,7 @@ const NavBar: FC = () => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Box height="32px" width="32px" p="2" backgroundColor="gray.900" borderRadius="full">
-          <Logo size={16} />
-        </Box>
-
+        <Box></Box>
         <AboutDialog />
       </Container>
     </Container>
