@@ -1,8 +1,8 @@
 import { ButtonProps, Button } from "@chakra-ui/button";
 import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Tooltip } from "@chakra-ui/react";
 import { FC } from "react";
 import { ICON_BACKGROUND, ICON_BACKGROUND_HOVER } from "../../config/colors";
+import CustomTooltip from "../CustomTooltip";
 
 interface PanelIconButtonProps {
   buttonProps?: ButtonProps;
@@ -23,15 +23,9 @@ const PanelIconButton: FC<PanelIconButtonProps> = ({
     ICON_BACKGROUND_HOVER.light,
     ICON_BACKGROUND_HOVER.dark
   );
-  const textColor = useColorModeValue("black", "white");
 
   return (
-    <Tooltip
-      bg={iconBackground}
-      textColor={textColor}
-      fontWeight="normal"
-      label={label}
-    >
+    <CustomTooltip label={label}>
       <Button
         variant="unstyled"
         size="lg"
@@ -45,7 +39,7 @@ const PanelIconButton: FC<PanelIconButtonProps> = ({
       >
         {children}
       </Button>
-    </Tooltip>
+    </CustomTooltip>
   );
 };
 
