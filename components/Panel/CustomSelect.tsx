@@ -7,7 +7,6 @@ import {
   BACKGROUND_COLOR,
   ICON_BACKGROUND,
   ICON_BACKGROUND_HOVER,
-  TEXT,
   TEXT_HIGHLIGHT
 } from "../../config/colors";
 
@@ -37,7 +36,6 @@ const CustomSelect: FC<CustomSelectProps> = ({
     ICON_BACKGROUND_HOVER.light,
     ICON_BACKGROUND_HOVER.dark
   );
-  const textColor = useColorModeValue(TEXT.light, TEXT.dark);
   const textHighlightColor = useColorModeValue(
     TEXT_HIGHLIGHT.light,
     TEXT_HIGHLIGHT.dark
@@ -57,7 +55,6 @@ const CustomSelect: FC<CustomSelectProps> = ({
           py="1"
           fontWeight="medium"
           bg={iconBackground}
-          textColor={textColor}
           borderColor={iconBackground}
           _hover={{ backgroundColor: iconBackgroundHover }}
           _active={{ backgroundColor: iconBackgroundHover }}

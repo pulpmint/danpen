@@ -31,9 +31,9 @@ export interface IPanelContext {
 const initialContext: IPanelContext = {
   darkMode: false,
   lineNumber: false,
-  background: true,
+  background: false,
   maxWidth: false,
-  padding: PADDING[0],
+  padding: PADDING[1],
   color: GRADIENTS[0],
   font: FONTSTYLE[0],
   language: LANGUAGES[0],

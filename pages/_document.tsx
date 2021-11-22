@@ -1,5 +1,6 @@
-import { ColorModeScript, theme } from "@chakra-ui/react";
+import { ColorModeScript } from "@chakra-ui/react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import { theme } from "../config/theme";
 import { CDN_VERSION_CONSTANT } from "../constants/misc";
 import {
   SEO_DESCRIPTION,
@@ -28,7 +29,11 @@ class MyDocument extends Document {
           <meta property="og:image" content={SEO_IMAGE} key="ogimage" />
 
           <link rel="preconnect" href="https://rsms.me/" />
-          <link rel="preload" as="style" href="https://rsms.me/inter/inter.css" />
+          <link
+            rel="preload"
+            as="style"
+            href="https://rsms.me/inter/inter.css"
+          />
           <link
             rel="stylesheet"
             href="https://rsms.me/inter/inter.css"
@@ -40,10 +45,15 @@ class MyDocument extends Document {
             <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
           </noscript>
 
-          <link rel="stylesheet" href={`${CDN_VERSION_CONSTANT}/codemirror.min.css`} />
+          <link
+            rel="stylesheet"
+            href={`${CDN_VERSION_CONSTANT}/codemirror.min.css`}
+          />
           <script src={`${CDN_VERSION_CONSTANT}/codemirror.min.js`}></script>
           <script src={`${CDN_VERSION_CONSTANT}/mode/meta.min.js`}></script>
-          <script src={`${CDN_VERSION_CONSTANT}/addon/mode/loadmode.min.js`}></script>
+          <script
+            src={`${CDN_VERSION_CONSTANT}/addon/mode/loadmode.min.js`}
+          ></script>
         </Head>
         <body>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />

@@ -1,4 +1,4 @@
-import { Box, ChakraProvider, CSSReset, ThemeProvider } from "@chakra-ui/react";
+import { Box, ChakraProvider, CSSReset } from "@chakra-ui/react";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect, useState } from "react";
@@ -26,25 +26,23 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
 
       <main>
-        <ChakraProvider>
-          <ThemeProvider theme={theme}>
-            <CSSReset />
-            <PanelContextProvider>
-              <Box opacity={opacity}>
-                {!!width && width >= 768 ? (
-                  <>
-                    <FontFaces />
-                    <MarkDownTheme />
-                    <CodeMirrorTheme />
-                    <Misc />
-                    <Component {...pageProps} />
-                  </>
-                ) : (
-                  <PissOff />
-                )}
-              </Box>
-            </PanelContextProvider>
-          </ThemeProvider>
+        <ChakraProvider theme={theme}>
+          <CSSReset />
+          <PanelContextProvider>
+            <Box opacity={opacity}>
+              {!!width && width >= 768 ? (
+                <>
+                  <FontFaces />
+                  <MarkDownTheme />
+                  <CodeMirrorTheme />
+                  <Misc />
+                  <Component {...pageProps} />
+                </>
+              ) : (
+                <PissOff />
+              )}
+            </Box>
+          </PanelContextProvider>
         </ChakraProvider>
       </main>
     </>

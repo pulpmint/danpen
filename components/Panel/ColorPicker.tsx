@@ -3,7 +3,6 @@ import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Input } from "@chakra-ui/input";
 import { Box, Divider, Text } from "@chakra-ui/layout";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
-import { Tooltip } from "@chakra-ui/tooltip";
 import { ChangeEvent, FC } from "react";
 import { Image, MinusCircle } from "react-feather";
 import MinusIcon from "../../assets/SVGs/MinusIcon";
@@ -11,11 +10,11 @@ import {
   BACKGROUND_COLOR,
   ICON_BACKGROUND,
   ICON_BACKGROUND_HOVER,
-  TEXT,
   TEXT_HIGHLIGHT
 } from "../../config/colors";
 import { GRADIENTS } from "../../constants/gradients";
 import usePanelSettings from "../../hooks/usePanelSettings";
+import CustomTooltip from "../CustomTooltip";
 import ColorDetail from "./ColorDetail";
 
 const ColorPicker: FC = () => {
@@ -34,7 +33,7 @@ const ColorPicker: FC = () => {
     ICON_BACKGROUND_HOVER.light,
     ICON_BACKGROUND_HOVER.dark
   );
-  const textColor = useColorModeValue(TEXT.light, TEXT.dark);
+  const textColor = useColorModeValue("black", "white");
   const textHighlightColor = useColorModeValue(
     TEXT_HIGHLIGHT.light,
     TEXT_HIGHLIGHT.dark
@@ -59,12 +58,7 @@ const ColorPicker: FC = () => {
 
   return (
     <Menu>
-      <Tooltip
-        bg={iconBackground}
-        textColor={textColor}
-        fontWeight="normal"
-        label="Select Background"
-      >
+      <CustomTooltip label="Select Background">
         <Box mr="6">
           <MenuButton
             as={IconButton}
@@ -99,7 +93,7 @@ const ColorPicker: FC = () => {
             )}
           </MenuButton>
         </Box>
-      </Tooltip>
+      </CustomTooltip>
 
       <MenuList
         rounded="xl"

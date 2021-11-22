@@ -3,7 +3,6 @@ import { theme } from "./theme";
 
 const GRAY = theme.colors.gray;
 
-export const ICON_COLOR: IColorValues = { light: GRAY[100], dark: GRAY[800] };
 export const BACKGROUND_COLOR: IColorValues = { light: "white", dark: GRAY[900] };
 export const ICON_BACKGROUND: IColorValues = { light: GRAY[100], dark: GRAY[800] };
 export const ICON_BACKGROUND_HOVER: IColorValues = { light: GRAY[200], dark: GRAY[700] };

@@ -18,8 +18,8 @@ const ToggleButton: FC<IToggleButton> = ({
   return (
     <PanelIconButton
       buttonProps={{
-        "aria-label": label,
         mr: "4",
+        p: "3.5",
         bg: toggleValue ? iconBackground : "transparent",
         rounded: "full",
         onClick: () => toggle()

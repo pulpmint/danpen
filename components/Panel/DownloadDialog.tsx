@@ -1,4 +1,4 @@
-import { Button, IconButton } from "@chakra-ui/button";
+import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box, Divider, Text } from "@chakra-ui/layout";
 import {
   Modal,
@@ -10,15 +10,40 @@ import {
 import { FC, useState } from "react";
 import { X } from "react-feather";
 import DownloadIcon from "../../assets/SVGs/DownloadIcon";
+import {
+  BACKGROUND_COLOR,
+  ICON_BACKGROUND,
+  ICON_BACKGROUND_HOVER,
+  TEXT_HIGHLIGHT
+} from "../../config/colors";
 import { theme } from "../../config/theme";
 import { EXPORTSIZE } from "../../constants/panelSettings";
 import usePanelSettings from "../../hooks/usePanelSettings";
 import domToImage from "../../public/js/domToImage";
 import { ExportSize } from "../../types/PanelSettings";
+import CustomButton from "../CustomButton";
 import PanelIconButton from "./PanelIconButton";
 
 const DownloadDialog: FC = () => {
   const { exportSize, setExportSize } = usePanelSettings();
+
+  // colors
+  const backgroundColor = useColorModeValue(
+    BACKGROUND_COLOR.light,
+    BACKGROUND_COLOR.dark
+  );
+  const iconBackground = useColorModeValue(
+    ICON_BACKGROUND.light,
+    ICON_BACKGROUND.dark
+  );
+  const iconBackgroundHover = useColorModeValue(
+    ICON_BACKGROUND_HOVER.light,
+    ICON_BACKGROUND_HOVER.dark
+  );
+  const textHighlghtColor = useColorModeValue(
+    TEXT_HIGHLIGHT.light,
+    TEXT_HIGHLIGHT.dark
+  );
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -76,23 +101,24 @@ const DownloadDialog: FC = () => {
     <>
       <PanelIconButton
         buttonProps={{
-          "aria-label": "Download",
           ml: "6",
-          rounded: "2xl",
           textColor: "green.500",
           onClick: () => setOpen(true)
         }}
         label="Download Image"
       >
-        <Box m="3">
-          <DownloadIcon size={24} />
-        </Box>
+        <DownloadIcon size={24} />
       </PanelIconButton>
 
       <Modal isCentered onClose={() => setOpen(false)} isOpen={open}>
         <ModalOverlay />
 
-        <ModalContent>
+        <ModalContent
+          rounded="2xl"
+          overflow="hidden"
+          bg={backgroundColor}
+          shadow="none"
+        >
           <ModalHeader>
             <Box
               display="flex"
@@ -100,13 +126,11 @@ const DownloadDialog: FC = () => {
               justifyContent="space-between"
             >
               <Text fontWeight="bold">Select Size</Text>
-              <IconButton
-                size="sm"
-                borderRadius="full"
-                aria-label="close"
-                icon={<X size={16} />}
-                onClick={() => setOpen(false)}
-              />
+              <CustomButton
+                buttonProps={{ p: "0", onClick: () => setOpen(false) }}
+              >
+                <X size={16} />
+              </CustomButton>
             </Box>
           </ModalHeader>
 
@@ -131,35 +155,44 @@ const DownloadDialog: FC = () => {
                 overflow="hidden"
               >
                 {EXPORTSIZE.map(size => (
-                  <Button
+                  <CustomButton
                     key={size.value}
-                    size="sm"
-                    px="4"
-                    rounded="none"
-                    colorScheme={exportSize === size.value ? "green" : "gray"}
-                    onClick={() => setExportSize(size.value)}
+                    buttonProps={{
+                      textColor:
+                        exportSize === size.value ? "white" : textHighlghtColor,
+                      px: "4",
+                      rounded: "none",
+                      bg:
+                        exportSize === size.value
+                          ? theme.colors.green[500]
+                          : iconBackground,
+                      _hover: {
+                        backgroundColor:
+                          exportSize === size.value
+                            ? theme.colors.green[400]
+                            : iconBackgroundHover
+                      },
+                      onClick: () => setExportSize(size.value)
+                    }}
                   >
                     {size.label}
-                  </Button>
+                  </CustomButton>
                 ))}
               </Box>
 
-              <Button
-                key="download"
-                size="sm"
-                mr="2"
-                px="4"
-                rounded="full"
-                colorScheme="green"
-                onClick={() => exportImage(exportSize)}
+              <CustomButton
+                buttonProps={{
+                  px: "4",
+                  onClick: () => exportImage(exportSize)
+                }}
               >
                 Save Image
-              </Button>
+              </CustomButton>
             </Box>
 
             <Divider />
 
-            <Text my="4" fontSize="sm" textColor="gray.500">
+            <Text my="4" fontSize="sm" textColor={textHighlghtColor}>
               <b>Note:</b> Avoid large size background images as it might take
               long time to load or can make the site unresponsive.
             </Text>
