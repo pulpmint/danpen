@@ -76,17 +76,13 @@ const DownloadDialog: FC = () => {
     <>
       <PanelIconButton
         buttonProps={{
-          "aria-label": "Download",
           ml: "6",
-          rounded: "2xl",
           textColor: "green.500",
           onClick: () => setOpen(true)
         }}
         label="Download Image"
       >
-        <Box m="3">
-          <DownloadIcon size={24} />
-        </Box>
+        <DownloadIcon size={24} />
       </PanelIconButton>
 
       <Modal isCentered onClose={() => setOpen(false)} isOpen={open}>

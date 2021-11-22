@@ -1,11 +1,11 @@
-import { IconButtonProps, IconButton } from "@chakra-ui/button";
+import { ButtonProps, Button } from "@chakra-ui/button";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Tooltip } from "@chakra-ui/react";
 import { FC } from "react";
 import { ICON_BACKGROUND, ICON_BACKGROUND_HOVER } from "../../config/colors";
 
 interface PanelIconButtonProps {
-  buttonProps?: IconButtonProps;
+  buttonProps?: ButtonProps;
   label?: string;
 }
 
@@ -32,17 +32,19 @@ const PanelIconButton: FC<PanelIconButtonProps> = ({
       fontWeight="normal"
       label={label}
     >
-      <IconButton
+      <Button
         variant="unstyled"
         size="lg"
-        bg={iconBackground}
-        _hover={{ backgroundColor: iconBackgroundHover }}
         w="12"
         h="12"
+        p="3"
+        rounded="2xl"
+        bg={iconBackground}
+        _hover={{ backgroundColor: iconBackgroundHover }}
         {...buttonProps}
       >
         {children}
-      </IconButton>
+      </Button>
     </Tooltip>
   );
 };

@@ -34,13 +34,13 @@ const Panel: FC = () => {
   const toggleOptions: IToggleButton[] = [
     {
       label: "Toggle Dark / Light Mode",
-      icon: <Moon size={20} style={{ margin: "14px" }} />,
+      icon: <Moon size={20} />,
       toggleValue: darkMode,
       toggle: () => setDarkMode(!darkMode)
     },
     {
       label: "Toggle Line Number",
-      icon: <List size={20} style={{ margin: "14px" }} />,
+      icon: <List size={20} />,
       toggleValue: lineNumber,
       toggle: () => setLineNumber(!lineNumber)
     }
