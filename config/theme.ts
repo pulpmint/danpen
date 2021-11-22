@@ -25,6 +25,11 @@ export const theme: Theme = extendTheme({
       baseStyle: {
         fontWeight: "normal"
       }
+    },
+    Tooltip: {
+      baseStyle: {
+        borderRadius: "full"
+      }
     }
   }
 });
