@@ -37,9 +37,9 @@ const PanelIconButton: FC<PanelIconButtonProps> = ({
         size="lg"
         bg={iconBackground}
         _hover={{ backgroundColor: iconBackgroundHover }}
-        {...buttonProps}
         w="12"
         h="12"
+        {...buttonProps}
       >
         {children}
       </IconButton>
