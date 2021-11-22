@@ -11,7 +11,6 @@ import {
   BACKGROUND_COLOR,
   ICON_BACKGROUND,
   ICON_BACKGROUND_HOVER,
-  TEXT,
   TEXT_HIGHLIGHT
 } from "../../config/colors";
 import { GRADIENTS } from "../../constants/gradients";
@@ -34,7 +33,7 @@ const ColorPicker: FC = () => {
     ICON_BACKGROUND_HOVER.light,
     ICON_BACKGROUND_HOVER.dark
   );
-  const textColor = useColorModeValue(TEXT.light, TEXT.dark);
+  const textColor = useColorModeValue("black", "white");
   const textHighlightColor = useColorModeValue(
     TEXT_HIGHLIGHT.light,
     TEXT_HIGHLIGHT.dark

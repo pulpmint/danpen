@@ -2,11 +2,7 @@ import { Button } from "@chakra-ui/button";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box, Text } from "@chakra-ui/layout";
 import { FC } from "react";
-import {
-  ICON_BACKGROUND,
-  TEXT,
-  TEXT_HIGHLIGHT
-} from "../../config/colors";
+import { ICON_BACKGROUND, TEXT_HIGHLIGHT } from "../../config/colors";
 import { PADDING } from "../../constants/panelSettings";
 import usePanelSettings from "../../hooks/usePanelSettings";
 
@@ -20,7 +16,6 @@ const PaddingPicker: FC = () => {
     ICON_BACKGROUND.light,
     ICON_BACKGROUND.dark
   );
-  const textColor = useColorModeValue(TEXT.light, TEXT.dark);
   const textHighlightColor = useColorModeValue(
     TEXT_HIGHLIGHT.light,
     TEXT_HIGHLIGHT.dark
@@ -48,7 +43,6 @@ const PaddingPicker: FC = () => {
             py="1"
             fontWeight="medium"
             bg={val === padding ? iconBackground : "transparent"}
-            textColor={textColor}
             _hover={{ backgroundColor: iconBackground }}
             _active={{ backgroundColor: iconBackground }}
             key={index}
