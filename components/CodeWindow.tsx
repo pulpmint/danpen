@@ -47,7 +47,7 @@ const CodeWindow: FC = () => {
             minHeight="max-content"
             p="4"
             borderRadius="md"
-            boxShadow="xl"
+            boxShadow="2xl"
             backgroundColor={bg}
           >
             <WindowControls />
