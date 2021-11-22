@@ -4,8 +4,13 @@ import { Box, Heading, Link } from "@chakra-ui/layout";
 import { Modal, ModalBody, ModalContent, ModalOverlay } from "@chakra-ui/modal";
 import { Tooltip } from "@chakra-ui/tooltip";
 import { FC, ReactNode, useState } from "react";
-import { AtSign, GitHub, Twitter, X } from "react-feather";
+import { AtSign, Twitter, X } from "react-feather";
 import ReactMarkdown from "react-markdown";
+import {
+  BACKGROUND_COLOR,
+  ICON_BACKGROUND,
+  ICON_BACKGROUND_HOVER
+} from "../config/colors";
 import { aboutMarkdown } from "../constants/about";
 
 export interface SocialTags {
@@ -21,19 +26,25 @@ const social: SocialTags[] = [
     label: "Say 👋 on Twitter",
     service: "Twitter",
     icon: <Twitter size={20} />
-  },
-  {
-    link: "https://github.com/pulpmint",
-    label: "Check my GitHub 🐱‍💻",
-    service: "GitHub",
-    icon: <GitHub size={20} />
   }
 ];
 
 const AboutDialog: FC = () => {
   const buttonBg = useColorModeValue("transparent", "gray.900");
-  const modalBg = useColorModeValue("gray.100", "gray.900");
-  const headerBg = useColorModeValue("gray.200", "gray.800");
+
+  // colors
+  const backgroundColor = useColorModeValue(
+    BACKGROUND_COLOR.light,
+    BACKGROUND_COLOR.dark
+  );
+  const iconBackground = useColorModeValue(
+    ICON_BACKGROUND.light,
+    ICON_BACKGROUND.dark
+  );
+  const iconBackgroundHover = useColorModeValue(
+    ICON_BACKGROUND_HOVER.light,
+    ICON_BACKGROUND_HOVER.dark
+  );
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -43,7 +54,10 @@ const AboutDialog: FC = () => {
         <IconButton
           size="sm"
           aria-label="About"
+          variant="solid"
           rounded="full"
+          bg={iconBackground}
+          _hover={{ backgroundColor: iconBackgroundHover }}
           icon={<AtSign size={16} />}
         />
       </Box>
@@ -57,7 +71,7 @@ const AboutDialog: FC = () => {
       >
         <ModalOverlay />
 
-        <ModalContent overflow="hidden" bg={modalBg}>
+        <ModalContent rounded="2xl" overflow="hidden" bg={backgroundColor}>
           <ModalBody>
             <Box
               position="absolute"
@@ -66,7 +80,6 @@ const AboutDialog: FC = () => {
               right="0"
               minHeight="48"
               display="flex"
-              bg={headerBg}
               alignItems="flex-end"
               justifyContent="space-between"
             >
@@ -86,6 +99,8 @@ const AboutDialog: FC = () => {
                 variant="unstyled"
                 rounded="full"
                 aria-label="Close"
+                bg={iconBackground}
+                _hover={{ backgroundColor: iconBackgroundHover }}
                 icon={<X size={16} />}
                 onClick={() => setOpen(false)}
               />
