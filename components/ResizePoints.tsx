@@ -14,6 +14,9 @@ const ResizePoints: FC<BoxProps> = props => {
       h="2"
       bg="gray.500"
       rounded="full"
+      transitionProperty="transform"
+      transitionDuration="0.25s"
+      _hover={{ transform: "scale(1.25)" }}
     ></Box>
   );
 };
