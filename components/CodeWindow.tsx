@@ -1,5 +1,6 @@
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Box } from "@chakra-ui/layout";
+import { Fade } from "@chakra-ui/react";
 import { ScaleFade } from "@chakra-ui/transition";
 import { FC, useEffect, useState } from "react";
 import { BACKGROUND_COLOR } from "../config/colors";
@@ -16,9 +17,11 @@ const CodeWindow: FC = () => {
   const hg = useColorModeValue("blackAlpha.50", "whiteAlpha.50");
 
   const [mounted, setMounted] = useState<boolean>(false);
+  const [pointers, setPointers] = useState<boolean>(false);
 
   useEffect(() => {
     setTimeout(() => setMounted(true), 250);
+    setTimeout(() => setPointers(true), 500);
   }, []);
 
   useEffect(() => {
@@ -82,10 +85,12 @@ const CodeWindow: FC = () => {
         ></Box>
       )}
 
-      <ResizePoints id="w" cursor="w-resize" left="3"></ResizePoints>
-      <ResizePoints id="e" cursor="e-resize" right="3"></ResizePoints>
-
       <ScaleFade in={mounted}>
+        <Fade in={pointers}>
+          <ResizePoints id="w" cursor="w-resize" left="3"></ResizePoints>
+          <ResizePoints id="e" cursor="e-resize" right="3"></ResizePoints>
+        </Fade>
+
         <Box
           id="pic-area"
           width="full"
