@@ -3,13 +3,17 @@ import { createContext, FC, useState } from "react";
 import { GRADIENTS } from "../constants/gradients";
 import { ILanguage, LANGUAGES } from "../constants/languages";
 import { PADDING, FONTSTYLE } from "../constants/panelSettings";
-import { FontSetting, Gradient, PaddingSetting, ExportSize } from "../types/PanelSettings";
+import {
+  FontSetting,
+  Gradient,
+  PaddingSetting,
+  ExportSize
+} from "../types/PanelSettings";
 
 export interface IPanelContext {
   darkMode: boolean;
   lineNumber: boolean;
   background: boolean;
-  maxWidth: boolean;
   color: Gradient;
   padding: PaddingSetting;
   font: FontSetting;
@@ -19,7 +23,6 @@ export interface IPanelContext {
   setDarkMode: Function;
   setLineNumber: Function;
   setBackground: Function;
-  setMaxWidth: Function;
   setColor: Function;
   setPadding: Function;
   setFont: Function;
@@ -32,7 +35,6 @@ const initialContext: IPanelContext = {
   darkMode: false,
   lineNumber: false,
   background: false,
-  maxWidth: false,
   padding: PADDING[0],
   color: GRADIENTS[0],
   font: FONTSTYLE[0],
@@ -42,7 +44,6 @@ const initialContext: IPanelContext = {
   setDarkMode: () => {},
   setLineNumber: () => {},
   setBackground: () => {},
-  setMaxWidth: () => {},
   setColor: () => {},
   setPadding: () => {},
   setFont: () => {},
@@ -56,15 +57,24 @@ const PanelContext = createContext<IPanelContext>(initialContext);
 export const PanelContextProvider: FC = ({ children }) => {
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const [lineNumber, setLineNumber] = useState<boolean>(initialContext.lineNumber);
-  const [background, setBackground] = useState<boolean>(initialContext.background);
-  const [maxWidth, setMaxWidth] = useState<boolean>(initialContext.maxWidth);
+  const [lineNumber, setLineNumber] = useState<boolean>(
+    initialContext.lineNumber
+  );
+  const [background, setBackground] = useState<boolean>(
+    initialContext.background
+  );
   const [color, setColor] = useState<Gradient>(initialContext.color);
-  const [padding, setPadding] = useState<PaddingSetting>(initialContext.padding);
+  const [padding, setPadding] = useState<PaddingSetting>(
+    initialContext.padding
+  );
   const [font, setFont] = useState<FontSetting>(initialContext.font);
   const [language, setLanguage] = useState<ILanguage>(initialContext.language);
-  const [predictions, setPredictions] = useState<ILanguage>(initialContext.predictions);
-  const [exportSize, setExportSize] = useState<ExportSize>(initialContext.exportSize);
+  const [predictions, setPredictions] = useState<ILanguage>(
+    initialContext.predictions
+  );
+  const [exportSize, setExportSize] = useState<ExportSize>(
+    initialContext.exportSize
+  );
 
   return (
     <PanelContext.Provider
@@ -72,7 +82,6 @@ export const PanelContextProvider: FC = ({ children }) => {
         darkMode: colorMode === "dark" ? true : false,
         lineNumber,
         background,
-        maxWidth,
         color,
         padding,
         font,
@@ -82,7 +91,6 @@ export const PanelContextProvider: FC = ({ children }) => {
         setDarkMode: toggleColorMode,
         setLineNumber,
         setBackground,
-        setMaxWidth,
         setColor,
         setPadding,
         setFont,
