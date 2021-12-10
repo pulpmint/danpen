@@ -1,13 +1,9 @@
 import { Box, Container } from "@chakra-ui/layout";
 import { FC } from "react";
-import { Maximize, Minimize } from "react-feather";
-import usePanelSettings from "../hooks/usePanelSettings";
 import AboutDialog from "./AboutDialog";
 import CustomButton from "./CustomButton";
 
 const NavBar: FC = () => {
-  const { maxWidth, setMaxWidth } = usePanelSettings();
-
   return (
     <Container position="fixed" top="2" maxWidth="full" zIndex="1000">
       <Container
@@ -20,18 +16,11 @@ const NavBar: FC = () => {
         <AboutDialog />
 
         <Box display="flex" alignItems="center" gridGap="3">
-          <CustomButton buttonProps={{ fontSize: "xs", px: "4" }} label="Coming Soon!">
-            Keyboard Shortcuts
-          </CustomButton>
-
           <CustomButton
-            buttonProps={{
-              p: "0",
-              onClick: () => setMaxWidth(!maxWidth)
-            }}
-            label={!!maxWidth ? "Minimize" : "Maximize"}
+            buttonProps={{ fontSize: "xs", px: "4" }}
+            label="Coming Soon!"
           >
-            {!!maxWidth ? <Minimize size={16} /> : <Maximize size={16} />}
+            Keyboard Shortcuts
           </CustomButton>
         </Box>
       </Container>
