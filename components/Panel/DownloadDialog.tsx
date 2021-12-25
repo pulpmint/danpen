@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/modal";
 import { Button } from "@chakra-ui/react";
 import { FC, ReactNode, useEffect, useState } from "react";
-import { Check, Copy, Twitter, X } from "react-feather";
+import { Check, Copy, Download, Twitter, X } from "react-feather";
 import DownloadIcon from "../../assets/SVGs/DownloadIcon";
 import {
   BACKGROUND_COLOR,
@@ -151,7 +151,7 @@ const DownloadDialog: FC = () => {
     {
       bg: tweetColor,
       color: theme.colors.twitter[500],
-      icon: <Twitter />,
+      icon: <Twitter size={20} />,
       onClick: () => console.log("Twitter"),
       label: "Tweet",
       disabled: rendering,
@@ -160,7 +160,7 @@ const DownloadDialog: FC = () => {
     {
       bg: copyColor,
       color: theme.colors.orange[500],
-      icon: copied ? <Check /> : <Copy />,
+      icon: copied ? <Check size={20} /> : <Copy size={20} />,
       onClick: () => exportImage(exportSize, "BLOB"),
       label: copied ? "Copied" : "Copy",
       disabled: rendering || !isClipboardSupported,
@@ -169,7 +169,7 @@ const DownloadDialog: FC = () => {
     {
       bg: downoadColor,
       color: theme.colors.green[500],
-      icon: <DownloadIcon />,
+      icon: <Download size={20} />,
       onClick: () => exportImage(exportSize, "PNG"),
       label: "PNG",
       disabled: rendering,
@@ -183,9 +183,10 @@ const DownloadDialog: FC = () => {
         buttonProps={{
           ml: "6",
           textColor: "green.500",
+          transform: "rotate(180deg)",
           onClick: () => setOpen(true)
         }}
-        label="Download Image"
+        label="Share Code Snippet"
       >
         <DownloadIcon size={24} />
       </PanelIconButton>
