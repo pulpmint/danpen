@@ -27,7 +27,15 @@ const PanelIconButton: FC<PanelIconButtonProps> = ({
 
   return (
     <CustomTooltip label={label}>
-      <Box>
+      <Box
+        m={buttonProps.m}
+        my={buttonProps.my}
+        mx={buttonProps.mx}
+        mt={buttonProps.mt}
+        mr={buttonProps.mr}
+        mb={buttonProps.mb}
+        ml={buttonProps.ml}
+      >
         <Button
           variant="unstyled"
           size="lg"
@@ -38,6 +46,13 @@ const PanelIconButton: FC<PanelIconButtonProps> = ({
           bg={iconBackground}
           _hover={{ backgroundColor: iconBackgroundHover }}
           {...buttonProps}
+          m=""
+          my=""
+          mx=""
+          mt=""
+          mr=""
+          mb=""
+          ml=""
         >
           {children}
         </Button>
