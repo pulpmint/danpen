@@ -25,7 +25,7 @@ import CustomButton from "../CustomButton";
 import PanelIconButton from "./PanelIconButton";
 
 const DownloadDialog: FC = () => {
-  const { exportSize, setExportSize } = usePanelSettings();
+  const { exportSize, setExportSize, setRendering } = usePanelSettings();
 
   // colors
   const backgroundColor = useColorModeValue(
@@ -51,9 +51,7 @@ const DownloadDialog: FC = () => {
     if (document && window) {
       const link = document.createElement("a");
 
-      const picArea = document.getElementById("pic-area");
-
-      picArea.style.backgroundColor = "transparent";
+      setRendering(true);
 
       const config = {
         style: {
@@ -82,8 +80,6 @@ const DownloadDialog: FC = () => {
         config
       );
 
-      picArea.style.backgroundColor = theme.colors.blackAlpha[100];
-
       link.href = base64;
       link.download = `Danpen ${scale - 1}x.png`;
 
@@ -93,6 +89,7 @@ const DownloadDialog: FC = () => {
       link.remove();
     }
 
+    setRendering(false);
     setExportSize(scale);
     setOpen(false);
   };

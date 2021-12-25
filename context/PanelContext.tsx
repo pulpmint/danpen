@@ -20,6 +20,7 @@ export interface IPanelContext {
   language: ILanguage;
   predictions: ILanguage;
   exportSize: ExportSize;
+  rendering: boolean;
   setDarkMode: Function;
   setLineNumber: Function;
   setBackground: Function;
@@ -29,6 +30,7 @@ export interface IPanelContext {
   setLanguage: Function;
   setPredictions: Function;
   setExportSize: Function;
+  setRendering: Function;
 }
 
 const initialContext: IPanelContext = {
@@ -41,6 +43,7 @@ const initialContext: IPanelContext = {
   language: LANGUAGES[0],
   predictions: null,
   exportSize: 3,
+  rendering: false,
   setDarkMode: () => {},
   setLineNumber: () => {},
   setBackground: () => {},
@@ -49,7 +52,8 @@ const initialContext: IPanelContext = {
   setFont: () => {},
   setLanguage: () => {},
   setPredictions: () => {},
-  setExportSize: () => {}
+  setExportSize: () => {},
+  setRendering: () => {}
 };
 
 const PanelContext = createContext<IPanelContext>(initialContext);
@@ -75,6 +79,7 @@ export const PanelContextProvider: FC = ({ children }) => {
   const [exportSize, setExportSize] = useState<ExportSize>(
     initialContext.exportSize
   );
+  const [rendering, setRendering] = useState<boolean>(initialContext.rendering);
 
   return (
     <PanelContext.Provider
@@ -88,6 +93,7 @@ export const PanelContextProvider: FC = ({ children }) => {
         language,
         predictions,
         exportSize,
+        rendering,
         setDarkMode: toggleColorMode,
         setLineNumber,
         setBackground,
@@ -96,7 +102,8 @@ export const PanelContextProvider: FC = ({ children }) => {
         setFont,
         setLanguage,
         setPredictions,
-        setExportSize
+        setExportSize,
+        setRendering
       }}
     >
       {children}

@@ -11,7 +11,7 @@ import ResizePoints from "./ResizePoints";
 import WindowControls from "./WindowControls";
 
 const CodeWindow: FC = () => {
-  const { background, color, padding } = usePanelSettings();
+  const { background, color, padding, rendering } = usePanelSettings();
 
   const bg = useColorModeValue(BACKGROUND_COLOR.light, BACKGROUND_COLOR.dark);
   const hg = useColorModeValue("blackAlpha.50", "whiteAlpha.50");
@@ -95,7 +95,9 @@ const CodeWindow: FC = () => {
           id="pic-area"
           width="full"
           p={padding}
-          backgroundColor={background ? "blackAlpha.100" : hg}
+          backgroundColor={
+            rendering ? "transparent" : background ? "blackAlpha.50" : hg
+          }
         >
           <Box
             width="full"
