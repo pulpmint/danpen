@@ -7,25 +7,39 @@ import {
   ModalHeader,
   ModalOverlay
 } from "@chakra-ui/modal";
-import { FC, useState } from "react";
-import { X } from "react-feather";
+import { Button } from "@chakra-ui/react";
+import { FC, ReactNode, useEffect, useState } from "react";
+import { Check, Copy, Twitter, X } from "react-feather";
 import DownloadIcon from "../../assets/SVGs/DownloadIcon";
 import {
   BACKGROUND_COLOR,
   ICON_BACKGROUND,
-  ICON_BACKGROUND_HOVER,
   TEXT_HIGHLIGHT
 } from "../../config/colors";
 import { theme } from "../../config/theme";
 import { EXPORTSIZE } from "../../constants/panelSettings";
+import useClipboardSupport from "../../hooks/useClipboardSupported";
 import usePanelSettings from "../../hooks/usePanelSettings";
 import domToImage from "../../public/js/domToImage";
 import { ExportSize } from "../../types/PanelSettings";
 import CustomButton from "../CustomButton";
 import PanelIconButton from "./PanelIconButton";
 
+interface IOption {
+  bg: string;
+  color: string;
+  icon: ReactNode;
+  onClick: Function;
+  label: string;
+  disabled: boolean;
+  tooltip: string;
+}
+
+type DownloadFormat = "PNG" | "BLOB";
+
 const DownloadDialog: FC = () => {
-  const { exportSize, setExportSize, setRendering } = usePanelSettings();
+  const { exportSize, rendering, setExportSize, setRendering } =
+    usePanelSettings();
 
   // colors
   const backgroundColor = useColorModeValue(
@@ -36,23 +50,22 @@ const DownloadDialog: FC = () => {
     ICON_BACKGROUND.light,
     ICON_BACKGROUND.dark
   );
-  const iconBackgroundHover = useColorModeValue(
-    ICON_BACKGROUND_HOVER.light,
-    ICON_BACKGROUND_HOVER.dark
-  );
   const textHighlghtColor = useColorModeValue(
     TEXT_HIGHLIGHT.light,
     TEXT_HIGHLIGHT.dark
   );
+  const tweetColor = useColorModeValue("twitter.50", "twitter.900");
+  const copyColor = useColorModeValue("orange.50", "orange.900");
+  const downoadColor = useColorModeValue("green.50", "green.900");
+
+  // important to check the clipboard support for the browser
+  const isClipboardSupported = useClipboardSupport();
 
   const [open, setOpen] = useState<boolean>(false);
+  const [copied, setCopied] = useState<boolean>(false);
 
-  const exportImage = async (scale: ExportSize) => {
+  const exportImage = async (scale: ExportSize, format: DownloadFormat) => {
     if (document && window) {
-      const link = document.createElement("a");
-
-      setRendering(true);
-
       const config = {
         style: {
           transform: `scale(${scale})`,
@@ -75,24 +88,94 @@ const DownloadDialog: FC = () => {
         height: document.getElementById("danpen").offsetHeight * scale
       };
 
-      const base64 = await domToImage.toPng(
-        document.getElementById("danpen"),
-        config
-      );
+      setRendering(true);
+      setCopied(false);
 
-      link.href = base64;
-      link.download = `Danpen ${scale - 1}x.png`;
+      if (format === "PNG") {
+        const link = document.createElement("a");
 
-      document.body.appendChild(link);
+        const base64 = await domToImage.toPng(
+          document.getElementById("danpen"),
+          config
+        );
 
-      link.click();
-      link.remove();
+        link.href = base64;
+        link.download = `Danpen ${scale - 1}x.png`;
+
+        document.body.appendChild(link);
+
+        link.click();
+        link.remove();
+
+        setExportSize(scale);
+        setOpen(false);
+      }
+
+      if (format === "BLOB" && isClipboardSupported) {
+        const blob = await domToImage.toBlob(
+          document.getElementById("danpen"),
+          config
+        );
+
+        navigator.clipboard.write([
+          new window.ClipboardItem({
+            [blob.type]: blob
+          })
+        ]);
+
+        setCopied(true);
+      }
+
+      setRendering(false);
+    }
+  };
+
+  useEffect(() => {
+    let myTimeOut = null;
+
+    if (copied) {
+      myTimeOut = setTimeout(() => setCopied(false), 3000);
     }
 
-    setRendering(false);
-    setExportSize(scale);
+    return () => {
+      if (myTimeOut) clearTimeout(myTimeOut);
+    };
+  }, [copied]);
+
+  const handleClose = () => {
+    setCopied(false);
     setOpen(false);
   };
+
+  const OPTIONS: IOption[] = [
+    {
+      bg: tweetColor,
+      color: theme.colors.twitter[500],
+      icon: <Twitter />,
+      onClick: () => console.log("Twitter"),
+      label: "Tweet",
+      disabled: rendering,
+      tooltip: "Coming Soon!"
+    },
+    {
+      bg: copyColor,
+      color: theme.colors.orange[500],
+      icon: copied ? <Check /> : <Copy />,
+      onClick: () => exportImage(exportSize, "BLOB"),
+      label: copied ? "Copied" : "Copy",
+      disabled: rendering || !isClipboardSupported,
+      tooltip: !isClipboardSupported ? "Clipboard Not Supported" : ""
+    },
+    {
+      bg: downoadColor,
+      color: theme.colors.green[500],
+      icon: <DownloadIcon />,
+      onClick: () => exportImage(exportSize, "PNG"),
+      label: "PNG",
+      disabled: rendering,
+      tooltip: ""
+    }
+  ];
 
   return (
     <>
@@ -107,7 +190,7 @@ const DownloadDialog: FC = () => {
         <DownloadIcon size={24} />
       </PanelIconButton>
 
-      <Modal isCentered onClose={() => setOpen(false)} isOpen={open}>
+      <Modal isCentered onClose={() => handleClose()} isOpen={open}>
         <ModalOverlay />
 
         <ModalContent
@@ -122,9 +205,13 @@ const DownloadDialog: FC = () => {
               alignItems="center"
               justifyContent="space-between"
             >
-              <Text fontWeight="bold">Select Size</Text>
+              <Text fontWeight="bold">Share Code Snippet</Text>
               <CustomButton
-                buttonProps={{ p: "0", onClick: () => setOpen(false) }}
+                buttonProps={{
+                  p: "0",
+                  onClick: () => setOpen(false),
+                  disabled: rendering
+                }}
               >
                 <X size={16} />
               </CustomButton>
@@ -134,57 +221,95 @@ const DownloadDialog: FC = () => {
           <Divider />
 
           <ModalBody>
-            <Text mt="2" mb="4">
-              Select the size of the download. It might take a few seconds to
-              render the image. Please be patient.
-            </Text>
-
             <Box
+              mt="4"
+              mb="6"
               display="flex"
+              flexDir="row"
               alignItems="center"
-              mb="4"
               justifyContent="space-between"
             >
+              <Text fontSize="sm" textColor={textHighlghtColor}>
+                Select Code Snippet Size
+              </Text>
+
               <Box
                 display="flex"
+                flexDir="row"
                 alignItems="center"
+                gridGap="1"
                 rounded="full"
-                overflow="hidden"
               >
                 {EXPORTSIZE.map(size => (
-                  <CustomButton
+                  <Button
+                    disabled={rendering}
+                    size="xs"
+                    rounded="full"
+                    px="3.5"
+                    py="2"
+                    h="fit-content"
+                    fontWeight="medium"
+                    fontSize="xs"
+                    bg={
+                      exportSize === size.value ? iconBackground : "transparent"
+                    }
+                    _hover={{ backgroundColor: iconBackground }}
+                    _active={{ backgroundColor: iconBackground }}
                     key={size.value}
-                    buttonProps={{
-                      textColor:
-                        exportSize === size.value ? "white" : textHighlghtColor,
-                      px: "4",
-                      rounded: "none",
-                      bg:
-                        exportSize === size.value
-                          ? theme.colors.green[500]
-                          : iconBackground,
-                      _hover: {
-                        backgroundColor:
-                          exportSize === size.value
-                            ? theme.colors.green[400]
-                            : iconBackgroundHover
-                      },
-                      onClick: () => setExportSize(size.value)
-                    }}
+                    onClick={() => setExportSize(size.value)}
                   >
                     {size.label}
-                  </CustomButton>
+                  </Button>
                 ))}
               </Box>
+            </Box>
 
-              <CustomButton
-                buttonProps={{
-                  px: "4",
-                  onClick: () => exportImage(exportSize)
-                }}
-              >
-                Save Image
-              </CustomButton>
+            <Divider />
+
+            <Box
+              position="relative"
+              my="6"
+              display="flex"
+              flexDir="row"
+              alignItems="center"
+              gridGap="6"
+            >
+              {OPTIONS.map((option, i) => (
+                <Box
+                  key={i}
+                  display="flex"
+                  flexDir="column"
+                  alignItems="center"
+                  position={i === OPTIONS.length - 1 ? "absolute" : "relative"}
+                  right={i === OPTIONS.length - 1 ? "0" : ""}
+                >
+                  <PanelIconButton
+                    buttonProps={{
+                      disabled: option.disabled,
+                      p: "4",
+                      bg: option.bg,
+                      textColor: option.color,
+                      _hover: { backgroundColor: option.bg },
+                      rounded: "full",
+                      w: "max-content",
+                      h: "fit-content",
+                      onClick: () => option.onClick()
+                    }}
+                    label={option.tooltip}
+                  >
+                    {option.icon}
+                  </PanelIconButton>
+
+                  <Text
+                    mt="2"
+                    fontSize="sm"
+                    fontWeight="medium"
+                    textColor={textHighlghtColor}
+                  >
+                    {option.label}
+                  </Text>
+                </Box>
+              ))}
             </Box>
 
             <Divider />
