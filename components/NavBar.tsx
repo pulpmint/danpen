@@ -1,7 +1,7 @@
 import { Box, Container } from "@chakra-ui/layout";
 import { FC } from "react";
 import AboutDialog from "./AboutDialog";
-import CustomButton from "./CustomButton";
+import KeyboardShortcutsDialog from "./KeyboardShortcutsDialog";
 
 const NavBar: FC = () => {
   return (
@@ -16,12 +16,7 @@ const NavBar: FC = () => {
         <AboutDialog />
 
         <Box display="flex" alignItems="center" gridGap="3">
-          <CustomButton
-            buttonProps={{ fontSize: "xs", px: "4" }}
-            label="Coming Soon!"
-          >
-            Keyboard Shortcuts
-          </CustomButton>
+          <KeyboardShortcutsDialog />
         </Box>
       </Container>
     </Container>

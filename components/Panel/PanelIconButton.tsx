@@ -1,5 +1,6 @@
 import { ButtonProps, Button } from "@chakra-ui/button";
 import { useColorModeValue } from "@chakra-ui/color-mode";
+import { Box } from "@chakra-ui/react";
 import { FC } from "react";
 import { ICON_BACKGROUND, ICON_BACKGROUND_HOVER } from "../../config/colors";
 import CustomTooltip from "../CustomTooltip";
@@ -26,19 +27,36 @@ const PanelIconButton: FC<PanelIconButtonProps> = ({
 
   return (
     <CustomTooltip label={label}>
-      <Button
-        variant="unstyled"
-        size="lg"
-        w="12"
-        h="12"
-        p="3"
-        rounded="2xl"
-        bg={iconBackground}
-        _hover={{ backgroundColor: iconBackgroundHover }}
-        {...buttonProps}
+      <Box
+        m={buttonProps.m}
+        my={buttonProps.my}
+        mx={buttonProps.mx}
+        mt={buttonProps.mt}
+        mr={buttonProps.mr}
+        mb={buttonProps.mb}
+        ml={buttonProps.ml}
       >
-        {children}
-      </Button>
+        <Button
+          variant="unstyled"
+          size="lg"
+          w="12"
+          h="12"
+          p="3"
+          rounded="2xl"
+          bg={iconBackground}
+          _hover={{ backgroundColor: iconBackgroundHover }}
+          {...buttonProps}
+          m=""
+          my=""
+          mx=""
+          mt=""
+          mr=""
+          mb=""
+          ml=""
+        >
+          {children}
+        </Button>
+      </Box>
     </CustomTooltip>
   );
 };
