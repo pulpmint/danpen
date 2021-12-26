@@ -19,6 +19,7 @@ import {
 import { theme } from "../../config/theme";
 import { EXPORTSIZE } from "../../constants/panelSettings";
 import useClipboardSupport from "../../hooks/useClipboardSupported";
+import useKeyboardListener from "../../hooks/useKeyboardListener";
 import usePanelSettings from "../../hooks/usePanelSettings";
 import domToImage from "../../public/js/domToImage";
 import { ExportSize } from "../../types/PanelSettings";
@@ -38,6 +39,9 @@ interface IOption {
 type DownloadFormat = "PNG" | "BLOB";
 
 const DownloadDialog: FC = () => {
+  const download = useKeyboardListener({ key: "s", ctrl: true, alt: true });
+  const copy = useKeyboardListener({ key: "c", ctrl: true, alt: true });
+
   const { exportSize, rendering, setExportSize, setRendering } =
     usePanelSettings();
 
@@ -141,6 +145,14 @@ const DownloadDialog: FC = () => {
       if (myTimeOut) clearTimeout(myTimeOut);
     };
   }, [copied]);
+
+  useEffect(() => {
+    // download
+    if (download) exportImage(exportSize, "PNG");
+
+    // copy
+    if (copy) exportImage(exportSize, "BLOB");
+  }, [download, copy]);
 
   const handleClose = () => {
     setCopied(false);

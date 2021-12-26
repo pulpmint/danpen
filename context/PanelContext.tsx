@@ -1,8 +1,9 @@
 import { useColorMode } from "@chakra-ui/color-mode";
-import { createContext, FC, useState } from "react";
+import { createContext, FC, useEffect, useState } from "react";
 import { GRADIENTS } from "../constants/gradients";
 import { ILanguage, LANGUAGES } from "../constants/languages";
 import { PADDING, FONTSTYLE } from "../constants/panelSettings";
+import useKeyboardListener from "../hooks/useKeyboardListener";
 import {
   FontSetting,
   Gradient,
@@ -59,6 +60,18 @@ const initialContext: IPanelContext = {
 const PanelContext = createContext<IPanelContext>(initialContext);
 
 export const PanelContextProvider: FC = ({ children }) => {
+  const b = useKeyboardListener({ key: "b" });
+  const d = useKeyboardListener({ key: "d" });
+  const n = useKeyboardListener({ key: "n" });
+  const f = useKeyboardListener({ key: "f" });
+  const g = useKeyboardListener({ key: "g" });
+  const sSize = useKeyboardListener({ key: "1" });
+  const mSize = useKeyboardListener({ key: "2" });
+  const lSize = useKeyboardListener({ key: "3" });
+  const sPadding = useKeyboardListener({ key: "s" });
+  const mPadding = useKeyboardListener({ key: "m" });
+  const lPadding = useKeyboardListener({ key: "l" });
+
   const { colorMode, toggleColorMode } = useColorMode();
 
   const [lineNumber, setLineNumber] = useState<boolean>(
@@ -80,6 +93,44 @@ export const PanelContextProvider: FC = ({ children }) => {
     initialContext.exportSize
   );
   const [rendering, setRendering] = useState<boolean>(initialContext.rendering);
+
+  useEffect(() => {
+    // background
+    if (b) setBackground(!background);
+
+    // dark / light theme
+    if (d) toggleColorMode();
+
+    // line number
+    if (n) setLineNumber(!lineNumber);
+
+    // font
+    if (f) setFont(FONTSTYLE[Math.floor(Math.random() * FONTSTYLE.length)]);
+
+    // gradient
+    if (g) {
+      if (!background) setBackground(true);
+      setColor(GRADIENTS[Math.floor(Math.random() * GRADIENTS.length)]);
+    }
+
+    // small
+    if (sSize) setExportSize(2);
+
+    // medium
+    if (mSize) setExportSize(3);
+
+    // large
+    if (lSize) setExportSize(4);
+
+    // padding - small
+    if (sPadding) setPadding(PADDING[0]);
+
+    // padding - medium
+    if (mPadding) setPadding(PADDING[1]);
+
+    // padding - large
+    if (lPadding) setPadding(PADDING[2]);
+  }, [b, d, n, f, g, sSize, mSize, lSize, sPadding, mPadding, lPadding]);
 
   return (
     <PanelContext.Provider
