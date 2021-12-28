@@ -1,40 +1,47 @@
-import { Container, Heading, Link, Text } from "@chakra-ui/layout";
+import { Box, Container, Heading, Link, Text } from "@chakra-ui/layout";
+import Image from "next/image";
 import { FC } from "react";
-import DoodleAlert from "../assets/SVGs/DoodleAlert";
-import useWindowSize from "../hooks/useWindowSize";
 
 const PissOff: FC = () => {
-  const { height } = useWindowSize();
-
   return (
     <Container
+      className="hello"
       display="flex"
       flexDirection="column"
       textAlign="center"
       alignItems="center"
       justifyContent="center"
-      height={height}
+      minH="inherit"
     >
-      <DoodleAlert size={0.4} />
+      <Box my="16">
+        <Box mb="8">
+          <Image
+            src="/images/stuck.png"
+            quality={100}
+            width={216}
+            height={216}
+          />
+        </Box>
 
-      <Heading my="4">Attention!</Heading>
+        <Heading>Ooops!</Heading>
 
-      <br />
+        <br />
 
-      <Text>
-        Please use a PC / tablet or switch to desktop mode for perfect
-        experience. No one writes code on their mobile phones anyway.
-      </Text>
+        <Text>
+          Please use a PC / tablet or switch to desktop mode for perfect
+          experience. No one writes code on their mobile phones anyway.
+        </Text>
 
-      <br />
+        <br />
 
-      <Link
-        isExternal
-        href="https://github.com/pulpmint/danpen/"
-        color="blue.300"
-      >
-        Check the code on GitHub
-      </Link>
+        <Link
+          isExternal
+          href="https://github.com/pulpmint/danpen/"
+          color="blue.300"
+        >
+          Check the code on GitHub
+        </Link>
+      </Box>
     </Container>
   );
 };

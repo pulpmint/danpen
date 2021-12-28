@@ -19,7 +19,8 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-feather": "^2.0.9",
-    "react-markdown": "^5.0.3"
+    "react-markdown": "^5.0.3",
+    "sharp": "^0.29.3"
   },
   "devDependencies": {
     "@types/node": "^14.14.35",

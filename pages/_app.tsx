@@ -1,7 +1,6 @@
 import { Box, ChakraProvider, CSSReset } from "@chakra-ui/react";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { useEffect, useState } from "react";
 import PissOff from "../components/PissOff";
 import { theme } from "../config/theme";
 import { SEO_TITLE } from "../constants/seo";
@@ -13,11 +12,7 @@ import MarkDownTheme from "../styles/MarkDownTheme";
 import Misc from "../styles/Misc";
 
 function App({ Component, pageProps }: AppProps) {
-  const { width } = useWindowSize();
-
-  const [opacity, setOpacity] = useState<number>(0);
-
-  useEffect(() => setOpacity(1), []);
+  const { height } = useWindowSize();
 
   return (
     <>
@@ -29,18 +24,17 @@ function App({ Component, pageProps }: AppProps) {
         <ChakraProvider theme={theme}>
           <CSSReset />
           <PanelContextProvider>
-            <Box opacity={opacity}>
-              {!!width && width >= 768 ? (
-                <>
-                  <FontFaces />
-                  <MarkDownTheme />
-                  <CodeMirrorTheme />
-                  <Misc />
-                  <Component {...pageProps} />
-                </>
-              ) : (
+            <Box minH={height}>
+              <Box minH="inherit" display={["none", "none", "block"]}>
+                <FontFaces />
+                <MarkDownTheme />
+                <CodeMirrorTheme />
+                <Misc />
+                <Component {...pageProps} />
+              </Box>
+              <Box minH="inherit" display={["block", "block", "none"]}>
                 <PissOff />
-              )}
+              </Box>
             </Box>
           </PanelContextProvider>
         </ChakraProvider>
