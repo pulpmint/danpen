@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/modal";
 import { Button } from "@chakra-ui/react";
 import { FC, ReactNode, useEffect, useState } from "react";
-import { Check, Copy, Download, Twitter, X } from "react-feather";
+import { Check, Copy, Download, X } from "react-feather";
 import DownloadIcon from "../../assets/SVGs/DownloadIcon";
 import {
   BACKGROUND_COLOR,
@@ -58,8 +58,8 @@ const DownloadDialog: FC = () => {
     TEXT_HIGHLIGHT.light,
     TEXT_HIGHLIGHT.dark
   );
-  const tweetColor = useColorModeValue("twitter.50", "twitter.900");
-  const copyColor = useColorModeValue("orange.50", "orange.900");
+
+  const copyColor = useColorModeValue("blue.50", "blue.900");
   const downoadColor = useColorModeValue("green.50", "green.900");
 
   // important to check the clipboard support for the browser
@@ -161,17 +161,8 @@ const DownloadDialog: FC = () => {
 
   const OPTIONS: IOption[] = [
     {
-      bg: tweetColor,
-      color: theme.colors.twitter[500],
-      icon: <Twitter size={20} />,
-      onClick: () => console.log("Twitter"),
-      label: "Tweet",
-      disabled: rendering,
-      tooltip: "Coming Soon!"
-    },
-    {
       bg: copyColor,
-      color: theme.colors.orange[500],
+      color: theme.colors.blue[500],
       icon: copied ? <Check size={20} /> : <Copy size={20} />,
       onClick: () => exportImage(exportSize, "BLOB"),
       label: copied ? "Copied" : "Copy",
@@ -293,8 +284,6 @@ const DownloadDialog: FC = () => {
                   display="flex"
                   flexDir="column"
                   alignItems="center"
-                  position={i === OPTIONS.length - 1 ? "absolute" : "relative"}
-                  right={i === OPTIONS.length - 1 ? "0" : ""}
                 >
                   <PanelIconButton
                     buttonProps={{
