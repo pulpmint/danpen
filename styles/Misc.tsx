@@ -19,7 +19,7 @@ const Misc: FC = () => {
   return (
     <style jsx global>{`
       body {
-        background-color: ${backgroundColor};
+        background-color: ${backgroundColor} !important;
       }
 
       .js-focus-visible :focus:not([data-focus-visible-added]) {
