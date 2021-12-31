@@ -93,11 +93,9 @@ const AboutDialog: FC = () => {
             </Box>
 
             <Box pos="relative" pt="6">
-              <ReactMarkdown
-                children={aboutMarkdown}
-                linkTarget="_blank"
-                className="markdown-theme"
-              />
+              <ReactMarkdown linkTarget="_blank" className="markdown-theme">
+                {aboutMarkdown}
+              </ReactMarkdown>
 
               <Box
                 position="absolute"
