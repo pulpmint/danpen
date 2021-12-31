@@ -1,4 +1,4 @@
-import { Box, Container, Heading, Link, Text } from "@chakra-ui/layout";
+import { Box, Container, Heading, Link, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { FC } from "react";
 

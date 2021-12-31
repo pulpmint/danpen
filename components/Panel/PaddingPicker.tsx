@@ -1,6 +1,4 @@
-import { Button } from "@chakra-ui/button";
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box, Text } from "@chakra-ui/layout";
+import { Box, Button, Text, useColorModeValue } from "@chakra-ui/react";
 import { FC } from "react";
 import { ICON_BACKGROUND, TEXT_HIGHLIGHT } from "../../config/colors";
 import { PADDING } from "../../constants/panelSettings";

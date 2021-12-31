@@ -1,4 +1,4 @@
-import { Container } from "@chakra-ui/layout";
+import { Container } from "@chakra-ui/react";
 import { FC } from "react";
 import NavBar from "../components/NavBar";
 import CodeWindow from "../components/CodeWindow";

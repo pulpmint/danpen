@@ -1,7 +1,4 @@
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box } from "@chakra-ui/layout";
-import { Fade } from "@chakra-ui/react";
-import { ScaleFade } from "@chakra-ui/transition";
+import { Box, Fade, ScaleFade, useColorModeValue } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { BACKGROUND_COLOR } from "../config/colors";
 import { theme } from "../config/theme";

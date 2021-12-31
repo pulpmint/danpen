@@ -1,6 +1,13 @@
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box, Heading, Link } from "@chakra-ui/layout";
-import { Modal, ModalBody, ModalContent, ModalOverlay } from "@chakra-ui/modal";
+import {
+  Box,
+  Heading,
+  Link,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalOverlay,
+  useColorModeValue
+} from "@chakra-ui/react";
 import { FC, ReactNode, useState } from "react";
 import { AtSign, Twitter, X } from "react-feather";
 import ReactMarkdown from "react-markdown";

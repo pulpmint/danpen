@@ -1,6 +1,4 @@
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box, Container } from "@chakra-ui/layout";
-import { ScaleFade } from "@chakra-ui/transition";
+import { Box, Container, ScaleFade, useColorModeValue } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { List, Moon } from "react-feather";
 import { BACKGROUND_COLOR, ICON_BACKGROUND } from "../../config/colors";

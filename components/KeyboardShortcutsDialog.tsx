@@ -1,12 +1,14 @@
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box, Divider, Text } from "@chakra-ui/layout";
 import {
+  Box,
+  Divider,
   Modal,
   ModalBody,
   ModalContent,
   ModalHeader,
-  ModalOverlay
-} from "@chakra-ui/modal";
+  ModalOverlay,
+  Text,
+  useColorModeValue
+} from "@chakra-ui/react";
 import { FC, useState } from "react";
 import { X } from "react-feather";
 import { BACKGROUND_COLOR, TEXT_HIGHLIGHT } from "../config/colors";

@@ -1,7 +1,13 @@
-import { Button } from "@chakra-ui/button";
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box, Text } from "@chakra-ui/layout";
-import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
+import {
+  Box,
+  Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+  useColorModeValue
+} from "@chakra-ui/react";
 import { FC } from "react";
 import {
   BACKGROUND_COLOR,

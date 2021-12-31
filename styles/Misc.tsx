@@ -1,6 +1,6 @@
+import { useColorModeValue } from "@chakra-ui/react";
 import { FC } from "react";
 import { theme } from "../config/theme";
-import { useColorModeValue } from "@chakra-ui/color-mode";
 
 import "focus-visible/dist/focus-visible";
 import { BACKGROUND_COLOR } from "../config/colors";
