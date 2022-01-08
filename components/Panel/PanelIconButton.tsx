@@ -1,6 +1,4 @@
-import { ButtonProps, Button } from "@chakra-ui/button";
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box } from "@chakra-ui/react";
+import { Box, ButtonProps, Button, useColorModeValue } from "@chakra-ui/react";
 import { FC } from "react";
 import { ICON_BACKGROUND, ICON_BACKGROUND_HOVER } from "../../config/colors";
 import CustomTooltip from "../CustomTooltip";

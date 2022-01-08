@@ -1,5 +1,4 @@
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box } from "@chakra-ui/layout";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import { FC } from "react";
 import { ICON_BACKGROUND } from "../../config/colors";
 

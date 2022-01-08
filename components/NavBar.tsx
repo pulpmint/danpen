@@ -1,4 +1,4 @@
-import { Box, Container } from "@chakra-ui/layout";
+import { Box, Container } from "@chakra-ui/react";
 import { FC } from "react";
 import AboutDialog from "./AboutDialog";
 import KeyboardShortcutsDialog from "./KeyboardShortcutsDialog";

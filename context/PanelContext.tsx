@@ -1,4 +1,4 @@
-import { useColorMode } from "@chakra-ui/color-mode";
+import { useColorMode } from "@chakra-ui/react";
 import { createContext, FC, useEffect, useState } from "react";
 import { GRADIENTS } from "../constants/gradients";
 import { ILanguage, LANGUAGES } from "../constants/languages";

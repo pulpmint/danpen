@@ -1,5 +1,4 @@
-import { Input } from "@chakra-ui/input";
-import { Box } from "@chakra-ui/layout";
+import { Box, Input } from "@chakra-ui/react";
 import { FC } from "react";
 
 const colors: string[] = ["red.500", "yellow.500", "green.500"];

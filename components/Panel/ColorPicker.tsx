@@ -1,8 +1,15 @@
-import { IconButton } from "@chakra-ui/button";
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Input } from "@chakra-ui/input";
-import { Box, Divider, Text } from "@chakra-ui/layout";
-import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
+import {
+  Box,
+  Divider,
+  IconButton,
+  Input,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+  useColorModeValue
+} from "@chakra-ui/react";
 import { ChangeEvent, FC } from "react";
 import { Image, MinusCircle } from "react-feather";
 import MinusIcon from "../../assets/SVGs/MinusIcon";

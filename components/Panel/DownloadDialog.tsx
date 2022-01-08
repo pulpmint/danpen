@@ -1,13 +1,15 @@
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Box, Divider, Text } from "@chakra-ui/layout";
 import {
+  Box,
+  Button,
+  Divider,
   Modal,
   ModalBody,
   ModalContent,
   ModalHeader,
-  ModalOverlay
-} from "@chakra-ui/modal";
-import { Button } from "@chakra-ui/react";
+  ModalOverlay,
+  Text,
+  useColorModeValue
+} from "@chakra-ui/react";
 import { FC, ReactNode, useEffect, useState } from "react";
 import { Check, Copy, Download, X } from "react-feather";
 import DownloadIcon from "../../assets/SVGs/DownloadIcon";
