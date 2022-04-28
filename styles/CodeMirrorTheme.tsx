@@ -1,6 +1,9 @@
 import { FC, useEffect, useState } from "react";
 import usePanelSettings from "../hooks/usePanelSettings";
-import { getCodeMirrorTheme, ICodeMirrorTheme } from "../config/codeMirrorTheme";
+import {
+  getCodeMirrorTheme,
+  ICodeMirrorTheme
+} from "../config/codeMirrorTheme";
 
 const CodeMirrorTheme: FC = () => {
   const { darkMode, font } = usePanelSettings();
