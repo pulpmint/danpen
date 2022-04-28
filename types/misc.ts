@@ -4,5 +4,5 @@ export interface ISVGProps {
 
 export interface IColorValues {
   dark: string;
-  light: string
+  light: string;
 }

@@ -123,7 +123,18 @@ export const LANGUAGES: ILanguage[] = [
   {
     name: "HTML/XML",
     mode: "htmlmixed",
-    highlight: ["xml", "html", "xhtml", "rss", "atom", "xjb", "xsd", "xsl", "plist", "svg"]
+    highlight: [
+      "xml",
+      "html",
+      "xhtml",
+      "rss",
+      "atom",
+      "xjb",
+      "xsd",
+      "xsl",
+      "plist",
+      "svg"
+    ]
   },
   {
     name: "Java",
